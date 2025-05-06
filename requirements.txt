@@ -8,4 +8,3 @@ openpyxl
 pyparsing
 scipy
 matplotlib
-gdown
