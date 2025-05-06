@@ -1,0 +1,28 @@
+Wed Jun 05 2019:
+	1. tau nan zero 이슈: 나오는 이슈해결. alphaC+alphaH 가 0이거나, deltaT = 0 이면 tau = 0 으로 바꿈
+
+Wed Apr 11 2018:
+	1. 열전 Device: fast_run_with_max_efficiency(), fast_run_with_max_power() 기능 추가; iteration 없이 계산하여 속도가 2.7배 빠르나 부정확할 수 있음. (thermoelectrics/solver1d/device.py)
+	2. 열전 Device: fast_rank_mats_as_device() 기능 추가; iteration 없이 계산하여 속도가 2.7배 빠르나 부정확할 수 있음. (thermoelectrics/solver1d/device_util.py)
+	3. 열전 Device: rank_mats_as_device() 또는 fast_rank_mats_as_device() 기능 사용시 필요 예상 시간을 좀 더 정확히 보여줌. (thermoelectrics/solver1d/device_util.py)
+
+Wed Apr 04 2018:
+	1. ParamSweeper: task가 한 개 뿐일 때 generate()가 오류나던 것을 수정. (util/paramsweeper.py)
+	2. ParamSweeper: param이 const뿐일 때 generate()가 에러 메세지를 내도록 수정. (util/paramsweeper.py)
+
+Tue Mar 20 2018:
+	1. 유한요소 계산: block mesh의 병합 기능 (merge_block_mesh()) 추가. (sfepy_util/merge.py)
+	2. 유한요소 계산: block mesh의 쌓기 기능 (stack_block_mesh()) 추가. (sfepy_util/stack.py)
+	3. 유한요소 계산: block mesh의 단순화 기능 추가. (sfepy_util/simplify.py)
+
+Thu Mar 15 2018:
+	1. fix: Leg 클래스에서 "None"으로 정의된 interface 물성은 이제 올바로 무시한다. (thermoelectrics/solver1d/leg.py)
+
+Mon Mar 12 2018:
+	1. 열전 leg/device의 최적 물질을 구하는 기능 추가. 함수 "rank_mats_as_leg" 및 "rank_mats_as_device". (pykeri/thermoelectrics/solver1d/device_util.py)
+
+Wed Mar 07 2018:
+	1. Device 클래스에서 최대 효율 모드, 최대 파워 모드 등을 계산할 수 있다. (pykeri/thermoelectrics/solver1d/device.py)
+
+Tue Mar 06 2018:
+	1. TEProp_xls.py 파일 내에 TEProp 클래스 생성. 엑셀 파일로 부터 열전 물성을 생성 가능. DB에서 열전 물성을 읽어오는 기존 TEProp 클래스와 구조가 거의 같기 때문에 유사하게 사용할 수 있다. (pykeri/thermoelectrics/TEProp_xls.py)

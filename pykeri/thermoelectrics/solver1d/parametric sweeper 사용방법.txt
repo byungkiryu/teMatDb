@@ -1,0 +1,9 @@
+# Wed Oct 11: 열전 물성 parametric sweeper 사용 설명
+
+
+1. setup.py 파일을 수정해 문제를 설정한다. setup.py를 실행하면 문제가 정의된 db 파일들이 생성된다.
+
+2. python run.py 문제파일.db
+  이런 형식으로 run.py를 실행하면 parametric sweep이 일어나고 문제파일.db에 이론 효율과 공식 효율이 계산되어 저장된다.
+
+3. 결과 분석 및 그림 그리는 기능은 차후 추가 예정.

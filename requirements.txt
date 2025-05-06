@@ -1,0 +1,11 @@
+#conda install conda=23.3.1
+#conda install scipy=1.10.1
+#pyhton==3.12
+#spyder==6.0.1
+#conda install plotly numpy openpyxl pandas scipy pyparsing matplotlib gdown
+plotly
+openpyxl
+pyparsing
+scipy
+matplotlib
+gdown
