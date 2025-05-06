@@ -94,14 +94,14 @@ def show_about():
 
 
     with st.expander("See Maps:", expanded=False):        
-        HERE2 = "./"
+        # HERE2 = "./"
         st.markdown("")
-        st.image(HERE2+"../images/southkorea_map_screenshot.png")    
+        st.image(os.path.join(HERE, "../images/southkorea_map_screenshot.png")   ) 
         st.caption("(South Korea Map) Changwon-si")
-        st.image(HERE2+"../images/changwon_map_screenshot.png")    
-        st.caption("(Changwon Map) Korea Electrotechnology Research Institute (KERI)")
-        st.image(HERE2+"../images/map_2023.jpg")   
-        st.caption("(KERI map) Office and Lab, building #3 and #5")
+        # st.image(HERE2+"../images/changwon_map_screenshot.png")    
+        # st.caption("(Changwon Map) Korea Electrotechnology Research Institute (KERI)")
+        # st.image(HERE2+"../images/map_2023.jpg")   
+        # st.caption("(KERI map) Office and Lab, building #3 and #5")
         # st.markdown("")
         # st.image(HERE+"./../images/southkorea_map_screenshot.png")    
         # st.caption("(South Korea Map) Changwon-si")
