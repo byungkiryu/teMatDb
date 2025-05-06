@@ -62,8 +62,17 @@ def show_link():
     st.markdown("""
                 Link, https://byungkiryu-alloydesigndb-demo-v0-33-main-v0-33-u86ejf.streamlit.app/
                 """)
-     
+
     return True
+
+def show_QR_code():
+    st.header(":blue[QR Code]")
+    
+    with st.expander("Web QR link for teMatDb:", expanded=False):            
+        st.image(os.path.join(HERE, "/../images/qrcode_tematdb.streamlit.app") )
+        st.subheader("https://tematdb.streamlit.app/")     
+
+
 
 if __name__=="__main__":
     df_map = pd.read_excel(EXCEL_PATH, sheet_name="read")  

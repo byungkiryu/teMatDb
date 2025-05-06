@@ -99,6 +99,7 @@ with tab_link:
     tab_contents_link.show_main_link_hub()
 #     tab_contents_link.show_network()
     tab_contents_link.show_link()
+    tab_contents_link.show_QR_code()
     
 with tab_about:   
     # Regarding KERI Info
