@@ -69,7 +69,7 @@ def show_QR_code():
     st.header(":blue[QR Code]")
     
     with st.expander("Web QR link for teMatDb:", expanded=False):            
-        st.image(os.path.join(HERE, "../images/qrcode_tematdb.streamlit.app") )
+        st.image(os.path.join(HERE, "../images/qrcode_tematdb.streamlit.app.png") )
         st.subheader("https://tematdb.streamlit.app/")     
 
 
