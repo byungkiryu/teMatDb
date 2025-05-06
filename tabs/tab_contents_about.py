@@ -94,14 +94,21 @@ def show_about():
 
 
     with st.expander("See Maps:", expanded=False):        
+        HERE2 = "./"
         st.markdown("")
-        st.image(HERE+"./../images/southkorea_map_screenshot.png")    
+        st.image(HERE2+"../images/southkorea_map_screenshot.png")    
         st.caption("(South Korea Map) Changwon-si")
-        st.image(HERE+"/../images/changwon_map_screenshot.png")    
+        st.image(HERE2+"../images/changwon_map_screenshot.png")    
         st.caption("(Changwon Map) Korea Electrotechnology Research Institute (KERI)")
-        st.image(HERE+"/../images/map_2023.jpg")   
+        st.image(HERE2+"../images/map_2023.jpg")   
         st.caption("(KERI map) Office and Lab, building #3 and #5")
-    
+        # st.markdown("")
+        # st.image(HERE+"./../images/southkorea_map_screenshot.png")    
+        # st.caption("(South Korea Map) Changwon-si")
+        # st.image(HERE+"/../images/changwon_map_screenshot.png")    
+        # st.caption("(Changwon Map) Korea Electrotechnology Research Institute (KERI)")
+        # st.image(HERE+"/../images/map_2023.jpg")   
+        # st.caption("(KERI map) Office and Lab, building #3 and #5")    
     st.header(":blue[QR Code]")
     # with st.expander("See QR code (v1.1.1):", expanded=False):            
     #     st.image(HERE+"/../images/qrcode_tematdb-v1-1-main-v1-1-1-abc.streamlit.app.png")
