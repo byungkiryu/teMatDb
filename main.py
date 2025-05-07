@@ -155,7 +155,7 @@ with st.sidebar:
     
     if db_mode == 'disabled':
         st.warning("⚠️ `teMatDb_expt` is currently not available.")
-        st.warning("⚠️ 'Starrydata2' works only in local environments: using [main - only local.py].")
+        st.warning("⚠️ 'Starrydata2' works only in local environments: using [main2_local_version.py].")
         st.stop()  # 선택되었을 경우 이후 코드 실행 방지
     if db_mode == 'Starrydata2':
         st.warning("⚠️ 'Starrydata2' works only in local environments. "
