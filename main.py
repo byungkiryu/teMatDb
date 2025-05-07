@@ -39,16 +39,16 @@ from library.dev_performance import set_singleleg_device, run_pykeri, draw_dev_p
 
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
 
-
-@st.cache_data
+ 
+# @st.cache_data
 def load_csv(filepath):
     return pd.read_csv(filepath)
 
-@st.cache_data
+# @st.cache_data
 def load_excel(filepath,sheet_name):
     return pd.read_excel(filepath,sheet_name=sheet_name)
 
-@st.cache_data
+# @st.cache_data
 def load_feather(filepath):
     return pd.read_feather(filepath)
 
@@ -127,21 +127,18 @@ DIR_40_tematdb_ZT_error          =  "./data_40_tematdb_ZT_error/"
 
 file_tematdb_metadata_excel   =  "./" + "_tematdb_metadata_v1.1.6-20250224.xlsx"
 file_tematdb_db_csv         =  DIR_10_tematdb_converted_to_csv + "tematdb_v1.1.6_completeTEPset.csv"
-file_tematdb_db_exTEP_csv   =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedTEPset.csv"
+file_tematdb_db_extZT_csv   =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedZTset_dT2K.csv"
 file_tematdb_error_csv      =  DIR_40_tematdb_ZT_error         + "ZT_error.csv"
 
 df_tematdb_meta             = load_excel( file_tematdb_metadata_excel, 'list')
 df_tematdb_csv              = load_csv(file_tematdb_db_csv)
-df_tematdb_extended_csv     = load_csv( file_tematdb_db_exTEP_csv )
+df_tematdb_extended_csv     = load_csv( file_tematdb_db_extZT_csv )
 df_tematdb_ZTerr            = load_csv( file_tematdb_error_csv )
 
 df_tematdb_csv["tepvalue"]  = df_tematdb_csv["tepvalue"].apply(lambda x: f"{x:.6e}")
 
 
 
-
-
-# df_db_error0_tematdb = pd.read_csv("./data_error_analysis/"+file_tematdb_error_csv)
  
 with st.sidebar:
     st.subheader(":red[Select TE Mat. DB]")
@@ -480,7 +477,8 @@ with tab_1_tep:
             fig3 = draw_mat_ZT_errors(mat, label_db=label_db, label_sample_id=label_sample_id, label_doi=label_doi)
             st.pyplot(fig3)        
             st.caption("Figure. ZT error analysis of :blue[sample_id={}] in :blue[{}].".format(sample_id,db_mode))
-            
+
+
           
     st.header(":blue[IV. Material Performance]")
     st.subheader(":red[[db_mode  = :blue[{}]]]".format(db_mode) + ":red[[sample_id = :blue[{}]]]".format( sample_id))
@@ -561,7 +559,7 @@ with tab_2_scZT:
         # cri_cols = ['davgZT', 'dpeakZT','Linf']
         # cri_vals = [0.10, 0.10, 0.10]
         
-        
+         
         
     df_db_error_criteria_list = []
     error_criteria_list = []
@@ -575,8 +573,8 @@ with tab_2_scZT:
         df_db_error_criteria.sort_values(by=cri_col,ascending=False, inplace=True)
         df_db_error_criteria.set_index('sample_id', inplace=True, drop=False)
         
-        df4_db_error_filtered = df4_db_error_filtered[ np.abs( df4_db_error_filtered[cri_col] ) < cri_val ].copy()
-        df5_db_error_anomaly  = df5_db_error_anomaly[ np.abs( df5_db_error_anomaly[cri_col] ) < cri_val ].copy()
+        df4_db_error_filtered = df4_db_error_filtered[ np.abs( df4_db_error_filtered[cri_col] ) <= cri_val ].copy()
+        df5_db_error_anomaly  = df5_db_error_anomaly[ np.abs( df5_db_error_anomaly[cri_col] ) > cri_val ].copy()
         
         cri_str = ":red[Noisy samples: {} > {:.2f}]".format(cri_col, cri_val)
         st.subheader(cri_str)
@@ -602,6 +600,7 @@ with tab_2_scZT:
         draw_ZT_error_correlation(df2)        
 
     st.subheader(":red[QQ analysis]")
+    # X = df1.ZT_author_declared - df1.ZT_tep_reevaluated
     fig_before_filter = draw3QQ(df1,df2,label_db, label_sample_id, label_doi)
     # fig_before_filter = draw4QQ(df1,df2,label_db, label_sampleid, label_doi)
     st.pyplot(fig_before_filter)
@@ -620,6 +619,7 @@ with tab_2_scZT:
         st.subheader(":red[ZT Error Correlation]")
         draw_ZT_error_correlation(df4)    
     st.subheader(":red[QQ analysis]")
+    # X = df1.ZT_author_declared - df1.ZT_tep_reevaluated
     fig_after_filter = draw3QQ(df3,df4,label_db, label_sample_id, label_doi)
     # fig_after_filter = draw4QQ(df3,df4,label_db, label_sampleid, label_doi)
     st.pyplot(fig_after_filter)      

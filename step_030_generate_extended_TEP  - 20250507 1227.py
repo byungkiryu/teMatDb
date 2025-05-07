@@ -181,8 +181,8 @@ df_extended_tep = pd.concat( df_extended_tep_sample_list, ignore_index= True)
 
 
 # dbname = 'tematdb'
-dbversionshort  = 'tematdb_{:s}_extendedTEPset'.format(dbversion)
-dbversionprefix = 'tematdb_{:s}_extendedTEPset_convertedOn_{}_'.format(dbversion,formattedDate)
+dbversionshort  = 'tematdb_{:s}_extendedTEPset_dT{}K'.format(dbversion,dT_unit)
+dbversionprefix = dbversionshort+'_convertedOn_{}_'.format(formattedDate)
 
 datetimeupdate =  datetime.datetime.now()
 
@@ -197,6 +197,19 @@ dbversionlabel = dbversionprefix+'_{:s}_{:d}_to_{:d}'.format(dbversiontype,sampl
 df_extended_tep.to_csv( DIR_30_tematdb_extTEP_csv +dbversionlabel+'.csv',index=False )
 df_extended_tep.to_csv( DIR_30_tematdb_extTEP_csv +dbversionshort+'.csv',index=False )
 
+col_onlyZT = ['sample_id',
+              'Temperature',
+              'ZT_author_declared',
+              'ZT_tep_reevaluated',
+              'is_Temp_in_autoTcTh_range',
+              'is_Temp_in_ZT_author_declared',
+              ]
+
+dbztshort  = 'tematdb_{:s}_extendedZTset_dT{}K'.format(dbversion,dT_unit)
+dbztprefix = dbztshort+'_convertedOn_{}_'.format(formattedDate)
+df_extended_tep_onlyZT = df_extended_tep[col_onlyZT]
+df_extended_tep_onlyZT.to_csv( DIR_30_tematdb_extTEP_csv +dbztshort+'.csv',index=False )
+df_extended_tep_onlyZT.to_csv( DIR_30_tematdb_extTEP_csv +dbztprefix+'.csv',index=False )
 
 
 samples_list_converted_extTEP = df_extended_tep.sample_id.unique().tolist()
