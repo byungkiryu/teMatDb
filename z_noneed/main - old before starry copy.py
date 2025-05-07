@@ -142,8 +142,8 @@ df_tematdb_csv["tepvalue"]  = df_tematdb_csv["tepvalue"].apply(lambda x: f"{x:.6
  
 with st.sidebar:
     st.subheader(":red[Select TE Mat. DB]")
-    display_options =['teMatDb','teMatDb_expt (disabled)','Starrydata (disabled)']
-    real_options    =['teMatDb','disabled','disabled']
+    display_options =['teMatDb','teMatDb_expt (disabled)','Starrydata2']
+    real_options    =['teMatDb','disabled','Starrydata2']
     
     selected_db_label  = st.radio( 'Select :red[Thermoelectric DB] :',
         options=display_options, 
@@ -155,7 +155,6 @@ with st.sidebar:
     
     if db_mode == 'disabled':
         st.warning("⚠️ `teMatDb_expt` is currently not available.")
-        st.warning("⚠️ 'Starrydata2' works only in local environments: using [main - only local.py].")
         st.stop()  # 선택되었을 경우 이후 코드 실행 방지
     if db_mode == 'Starrydata2':
         st.warning("⚠️ 'Starrydata2' works only in local environments. "
