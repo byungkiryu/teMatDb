@@ -11,7 +11,7 @@ This is the program to visualize
 import os
 import pandas as pd
 import streamlit as st
-
+import pydeck as pdk
 
 
 
@@ -51,15 +51,72 @@ def show_me():
 
 
 
-def show_about():
+def show_map():
     st.header(":blue[ThermoElectric Science Group (TES) at KERI]")
     # st.write("ThermoElectric Science Group at KERI, Korea")
     df_map = pd.read_excel(EXCEL_PATH, sheet_name="read")
     df_map_keri = df_map[0:1]
     st.map(df_map_keri, zoom=12)
+    st.map(df_map)
+
+def show_map_and_collaboration():
+    st.header(":blue[ThermoElectric Science Group (TES) at KERI]")
+    
+    # (1) 점 데이터: 친구들 위치 점 표시
+    df_map = pd.read_excel(EXCEL_PATH, sheet_name="read")
+    
+    # (2) 현재 위치 (KERI 본원 위치로 예시)
+    lat = 035.190
+    lon = 128.718
     
     
+    current_location = pd.DataFrame({
+                    'latitude': [lat],
+                    'longitude': [lon]
+                    })
+
+    # (3) View 설정 (줌인할 위치)
+    view_state = pdk.ViewState(
+        latitude=  lat,
+        longitude= lon,
+        zoom=12,
+        pitch=0
+    )
     
+    # (4) 전국 점들 레이어 (빨간 점)
+    layer_all = pdk.Layer(
+        "ScatterplotLayer",
+        data=df_map[1:],
+        get_position='[longitude, latitude]',
+        get_radius='radius',
+        radius_min_pixels=5,
+        get_fill_color=[255, 0, 0, 80],
+        pickable=True
+    )
+    
+    # (5) 현재 위치 레이어 (노란 큰 점)
+    layer_current = pdk.Layer(
+        "ScatterplotLayer",
+        data=df_map[0:1],
+        get_position='[longitude, latitude]',
+        get_radius='radius',
+        radius_min_pixels=5,
+        get_fill_color=[0, 0, 255, 100],  # 파란색 강조
+        pickable=True
+    )
+    
+    # (6) 지도 렌더링
+    st.pydeck_chart(pdk.Deck(
+        map_style="mapbox://styles/mapbox/light-v9",
+        initial_view_state=view_state,
+        layers=[layer_all,  layer_current]
+    ))
+    
+    with st.expander("See world-wide friends:", expanded=False):   
+        st.dataframe(df_map)
+    
+    
+def show_about():   
     
     with st.expander("See Members:", expanded=True):   
         st.subheader("SuDong Park, Dr. (박수동)")
