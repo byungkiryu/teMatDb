@@ -52,7 +52,7 @@ def load_excel(filepath,sheet_name):
 def load_feather(filepath):
     return pd.read_feather(filepath)
 
-
+ 
 
 # @st.cache_data
 # def load_map():
@@ -219,10 +219,9 @@ with st.sidebar:
     elif (db_mode == 'Starrydata2'):
         
         prefix = "20250210_rawdata"
+        PATh_starry   = "./postprocessed_Starrydata2_20250210_rawdata__analyzed20250507/"
         
-        # PATH_metadata = "../030 starrydata2502 to csv and filter  -- 20250210"
-        PATh_starry   = "../030 starrydata2502 to csv and filter  -- 20250506/"
-        # PATH_metadata = "../030 starrydata2502 to csv and filter  -- 20250506"
+        
         PATH_metadata = PATh_starry + "/999_Starrydata2_rawdata_meta/"
         PATH_metadata = PATH_metadata +"_Starrydata2_20250201_rawdata_meta_ZTfilterable_.xlsx"
         df_starry_meta0 = load_excel(PATH_metadata, sheet_name='20250201_rawdata', )       
@@ -230,6 +229,7 @@ with st.sidebar:
         df_db_meta.index = list(df_db_meta.sample_id.copy())
         df_db_meta['TF_mat_complete'] = df_db_meta['pykeri_TEPZT_readable']
         df_db_meta['doi'] = df_db_meta['DOI']
+
         
         PATH_tep_feather  = PATh_starry+"100_teps/"
         df_alpha0 = load_feather(PATH_tep_feather+"20250201_rawdata_alpha.feather")
@@ -246,7 +246,8 @@ with st.sidebar:
         
         
         PATH_exTEP = PATh_starry+"300_extended_teps/"
-        PATH_exTEP = PATH_exTEP  +"extendedTEPset_2K__20250506_180300.feather"
+        PATH_exTEP = PATH_exTEP  +"extendedZTset_2K.feather"
+        # PATH_exTEP = PATH_exTEP  +"extendedTEPset_2K__20250506_180300.feather"
         df_db_extended_csv = load_feather(PATH_exTEP )
         df_db_extended_csv = df_db_extended_csv[ df_db_extended_csv.is_Temp_in_autoTcTh_range ]
         df_db_extended_csv = df_db_extended_csv[ df_db_extended_csv.is_Temp_in_ZT_author_declared ] 
