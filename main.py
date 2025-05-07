@@ -246,7 +246,7 @@ with st.sidebar:
         
         
         PATH_exTEP = PATh_starry+"300_extended_teps/"
-        PATH_exTEP = PATH_exTEP  +"extendedZTset_2K.feather"
+        PATH_exTEP = PATH_exTEP  +"extendedZTset_4K.feather"
         # PATH_exTEP = PATH_exTEP  +"extendedTEPset_2K__20250506_180300.feather"
         df_db_extended_csv = load_feather(PATH_exTEP )
         df_db_extended_csv = df_db_extended_csv[ df_db_extended_csv.is_Temp_in_autoTcTh_range ]
