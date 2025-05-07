@@ -169,7 +169,8 @@ with st.sidebar:
     if (db_mode == 'teMatDb'):
         
         # df_tematdb_meta = pd.read_excel("./"+file_tematdb_metadata_excel, sheet_name='list', )
-        df_db_meta = df_tematdb_meta
+        df_tematdb_meta["label_of_targetZT_in_figure"] = df_tematdb_meta["label_of_targetZT_in_figure"].astype(str)
+        df_db_meta = df_tematdb_meta        
         df_db_meta.index = list(df_db_meta.sample_id.copy())
         
         df_db_csv = df_tematdb_csv
