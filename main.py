@@ -40,15 +40,15 @@ from library.dev_performance import set_singleleg_device, run_pykeri, draw_dev_p
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
 
  
-# @st.cache_data
+@st.cache_data
 def load_csv(filepath):
     return pd.read_csv(filepath)
 
-# @st.cache_data
+@st.cache_data
 def load_excel(filepath,sheet_name):
     return pd.read_excel(filepath,sheet_name=sheet_name)
 
-# @st.cache_data
+@st.cache_data
 def load_feather(filepath):
     return pd.read_feather(filepath)
 
