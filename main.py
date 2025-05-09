@@ -4,7 +4,7 @@ Created on Thu Mar 30 17:24:07 2023
 
 @author: cta4r
 
-This is the program to visualize 
+This is the program is 'streamlit run main.py` for tematDb
 
 """
 
@@ -34,7 +34,6 @@ from pykeri.byungkiryu import byungkiryu_util as br
 # from library.tematdb_util import get_Ts_TEPZT
 from library.tematdb_util import draw_mat_teps, tep_generator_from_excel_files
 from library.draw_ZT_errors_with_mat import draw_mat_ZT_errors, draw_ZT_error_correlation, draw3QQ, draw4QQ
-# from library.draw_ZT_errors_with_mat import draw_mat_ZT_errors, , draw3QQ, draw4QQ
 from library.dev_performance import set_singleleg_device, run_pykeri, draw_dev_perf
 
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
@@ -52,11 +51,7 @@ def load_excel(filepath,sheet_name):
 def load_feather(filepath):
     return pd.read_feather(filepath)
 
- 
 
-# @st.cache_data
-# def load_map():
-    # return pd.read_excel("./map/"+"map_info_dataframe.xlsx",sheet_name='test')  
 
 
 
@@ -156,23 +151,27 @@ with st.sidebar:
     
     
     if db_mode == 'disabled':
-        st.warning("⚠️ `teMatDb_expt` is currently not available.")
-        st.warning("⚠️ 'Starrydata2' works only in local environments.")
+        st.warning("⚠️'teMatDb_expt` is currently not available.")
+        st.warning("⚠️'Starrydata2` works only in local environments.")
         st.stop()  # 선택되었을 경우 이후 코드 실행 방지
     if db_mode == 'Starrydata2':
-        st.warning("⚠️ 'Starrydata2' works only in local environments. "
-                   "Due to file size limitations, it cannot be loaded in Streamlit Cloud. "
+        st.warning("⚠️ 'Starrydata2` works only in local environments.")
+        st.warning("🚫 Due to file size limitations, it cannot be loaded in Streamlit Cloud. "
                    "If needed, you can contact me to download the required files from a private link (to be announced).")
 
-        confirm_run = st.checkbox("I understand the above and wish to proceed with loading Starrydata2.", value=False)
-        if not confirm_run:
+        confirm_run1 = st.checkbox("I understand the above and wish to proceed with loading Starrydata2.", value=False)
+        if not confirm_run1:
             st.stop()     
             
-        password = st.text_input("Enter access password to proceed:", type="password")
+        password = st.text_input("🔒Enter access password to proceed:", type="password")
         if password != st.secrets["credentials"]["starry_pw"]:
             st.error("❌ Incorrect password. Access denied.")
-            st.stop()                
-   
+            st.stop()   
+            
+        confirm_run2 = st.checkbox("🛑 Stop! Think One more time. It can be broken. Be careful..!!", value=False)
+        if not confirm_run2:
+            st.stop()     
+
     
     if (db_mode == 'teMatDb'):
         
