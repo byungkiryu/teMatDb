@@ -39,16 +39,16 @@ from library.dev_performance import set_singleleg_device, run_pykeri, draw_dev_p
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
 
  
-# @st.cache_data
+@st.cache_data
 def load_csv(filepath):
-    # return pd.read_csv(filepath )
-    return pd.read_csv(filepath,  encoding='utf-8-sig')
+    return pd.read_csv(filepath )
+    # return pd.read_csv(filepath,  encoding='utf-8-sig')
 
-# @st.cache_data
+@st.cache_data
 def load_excel(filepath,sheet_name):
     return pd.read_excel(filepath,sheet_name=sheet_name)
 
-# @st.cache_data
+@st.cache_data
 def load_feather(filepath):
     return pd.read_feather(filepath)
 
@@ -118,12 +118,12 @@ dbname = 'tematdb'
 dbversion = "v1.1.6"
 
 ## DIR setting
-DIR_00_tematdb_raw_excel         =  "./data_00_tematdb_raw_excel/"
-DIR_10_tematdb_converted_to_csv  =  "./data_10_tematdb_csv_converted/"
-DIR_30_tematdb_extTEP_csv        =  "./data_30_tematdb_extTEP_csv/"
-DIR_40_tematdb_ZT_error          =  "./data_40_tematdb_ZT_error/"
+DIR_00_tematdb_raw_excel         =  "data_00_tematdb_raw_excel/"
+DIR_10_tematdb_converted_to_csv  =  "data_10_tematdb_csv_converted/"
+DIR_30_tematdb_extTEP_csv        =  "data_30_tematdb_extTEP_csv/"
+DIR_40_tematdb_ZT_error          =  "data_40_tematdb_ZT_error/"
 
-file_tematdb_metadata_excel   =  "./" + "_tematdb_metadata_v1.1.6-20250224.xlsx"
+file_tematdb_metadata_excel   =   "_tematdb_metadata_v1.1.6-20250224.xlsx"
 file_tematdb_db_csv         =  DIR_10_tematdb_converted_to_csv + "tematdb_v1.1.6_completeTEPset.csv"
 file_tematdb_db_extZT_csv   =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedZTset_dT2K.csv"
 file_tematdb_error_csv      =  DIR_40_tematdb_ZT_error         + "ZT_error_table_dropna.csv"
@@ -232,7 +232,7 @@ with st.sidebar:
         # PATh_starry   = "./postprocessed_Starrydata2_20250210_rawdata__analyzed20250507/"
         prefix = "20250501_rawdata"
         # PATh_starry   = "./postprocessed_Starrydata2_20250501_rawdata__analyzed20250512/"
-        PATh_starry   = "./postprocessed_Starrydata2_20250501/"
+        PATh_starry   = "postprocessed_Starrydata2_20250501/"
         
         
         
