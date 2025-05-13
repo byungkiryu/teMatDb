@@ -12,7 +12,7 @@ This is the program to visualize
 import os
 import numpy as np
 import pandas as pd
-# import streamlit as st
+import time as time
 
 
 from pykeri.scidata.matprop import MatProp
@@ -20,6 +20,8 @@ from pykeri.thermoelectrics.TEProp_xls import TEProp as TEProp_xls
 
 
 from pykeri.byungkiryu import byungkiryu_util as br
+formattedDate, yyyymmdd, HHMMSS = br.now_string()
+time00 = time.time()
  
 
 def tep_generator_from_excel_files(sample_id, interp_opt):    
@@ -35,7 +37,6 @@ def tep_generator_from_excel_files(sample_id, interp_opt):
                                 'sheetname': sheetname, 'color': (sample_id/255, 0/255, 0/255)} ) 
         TF_mat_complete = True     
         mat.set_interp_opt(interp_opt)
-        # print(sample_id)
         return TF_mat_complete, mat
     except:
         print(filename, sample_id, 'data set is incompelete or empty')
@@ -45,7 +46,6 @@ def tep_generator_from_excel_files(sample_id, interp_opt):
 
 def error_analysis(sample_id):
     
-
     report_dict = {}
     ## read sample extended teps
     
@@ -104,7 +104,7 @@ def error_analysis(sample_id):
     Th_ofZT         =  df_Ts_ZT.Temperature.max()
     
     Tc_ofTEPZT       = df_Ts_TEPZT.Temperature.min()
-    Th_ofTEPZT        =df_Ts_TEPZT.Temperature.max()
+    Th_ofTEPZT       = df_Ts_TEPZT.Temperature.max()
     
     deltaT_ofTEP    =   Th_ofTEP    - Tc_ofTEP
     deltaT_ofZT     =   Th_ofZT     - Tc_ofZT
@@ -125,7 +125,6 @@ def error_analysis(sample_id):
     report_dict['deltaT_ofTEP']   = deltaT_ofTEP
     report_dict['deltaT_ofZT']   = deltaT_ofZT
     report_dict['deltaT_ofTEPZT']   = deltaT_ofTEPZT   
-    
 
     avg_ZT_ofRawFig    = df_Ts_ZT.ZT_author_declared.mean()
     avg_ZT_ofTEPEval   = df_Ts_TEP.ZT_tep_reevaluated.mean()        
@@ -137,7 +136,6 @@ def error_analysis(sample_id):
     report_dict['peak_ZT_ofRawFig']  = peak_ZT_ofRawFig
     report_dict['peak_ZT_ofTEPEval'] = peak_ZT_ofTEPEval
 
-    
 
     d_Tmid                = Tmid_ofZT - Tmid_ofTEP
     d_avgZT               = avg_ZT_ofRawFig - avg_ZT_ofTEPEval
@@ -146,7 +144,6 @@ def error_analysis(sample_id):
     report_dict['d_Tmid'] = d_Tmid
     report_dict['d_avgZT'] = d_avgZT
     report_dict['d_peakZT'] = d_peakZT
-    
     
     
     dZT_TEPZT          = (df_Ts_TEPZT.ZT_author_declared) - (df_Ts_TEPZT.ZT_tep_reevaluated )   
@@ -239,22 +236,46 @@ interp_opt = {MatProp.OPT_INTERP:MatProp.INTERP_LINEAR,\
           MatProp.OPT_EXTEND_LEFT_TO:1,          # ok to 0 Kelvin
           MatProp.OPT_EXTEND_RIGHT_BY:2000}        # ok to +50 Kelvin from the raw data
 
+formattedDate_fin, yyyymmdd, HHMMSS = br.now_string()
+time_fin = time.time()
     
-
+report_string_lines = []
 sample_id_errLnorm_dict_list = []
-for sample_id in sample_id_list:
+for idx, sample_id in enumerate(sample_id_list):
     sample_id_errLnorm_dict = error_analysis(sample_id)
     sample_id_errLnorm_dict_list.append(sample_id_errLnorm_dict)
     
-    # if (sample_id_errLnorm_dict['TF_mat_complete']):
     peak_ZT_ofRawFig  = sample_id_errLnorm_dict['peak_ZT_ofRawFig']
     peak_ZT_ofTEPEval = sample_id_errLnorm_dict['peak_ZT_ofTEPEval']
     dpeakZT = peak_ZT_ofRawFig - peak_ZT_ofTEPEval
     print("{:03d} {:5.1f} {:5.1f} {:5.1f}".format(sample_id, peak_ZT_ofRawFig, peak_ZT_ofTEPEval, dpeakZT ))
+    
     del sample_id_errLnorm_dict
+    
+    timeNow = time.time()
+    proc = (idx+1)/len(sample_id_list)
+    timeElap = timeNow - time00
+    timeTota = timeElap / proc
+    timeRema = timeTota - timeElap
+    
+    report_string_each = "{:3d}/{:3d} : Time Elap/Total/Rema = {:5.1f}, {:5.1f}, {:5.1f} sec".format(idx+1,len(sample_id_list),
+                                                                timeElap, timeTota, timeRema)
+    report_string_lines.append(report_string_each+"\n")
+    print(report_string_each)
+    
 
-df_db_err = pd.DataFrame(sample_id_errLnorm_dict_list)
+df_tematdb_ZT_error = pd.DataFrame(sample_id_errLnorm_dict_list)
 
-df_db_err.to_csv(DIR_40_tematdb_ZT_error  +"ZT_error_{}.csv".format(formattedDate), index=False)
-df_db_err.to_csv(DIR_40_tematdb_ZT_error  +"ZT_error.csv", index=False)
+df_tematdb_ZT_error.to_csv(DIR_40_tematdb_ZT_error  +"ZT_error_table_{}.csv".format(formattedDate), index=False)
+df_tematdb_ZT_error.to_csv(DIR_40_tematdb_ZT_error  +"ZT_error_table.csv", index=False)
 
+df_tematdb_ZT_error_dropna = df_tematdb_ZT_error.dropna()
+df_tematdb_ZT_error_dropna.to_csv(DIR_40_tematdb_ZT_error  +"ZT_error_table_dropna.csv", index=False)
+df_tematdb_ZT_error_dropna.to_csv(DIR_40_tematdb_ZT_error  +"ZT_error_table_dropna_{}.csv".format(formattedDate), index=False)
+
+
+files_report = [  "z_report.txt",f"z_report_{formattedDate}.txt" ]
+
+for file in files_report:
+    with open(DIR_40_tematdb_ZT_error+ file, "w", encoding="utf-8") as f:
+        f.writelines(report_string_lines)

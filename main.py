@@ -126,7 +126,7 @@ DIR_40_tematdb_ZT_error          =  "./data_40_tematdb_ZT_error/"
 file_tematdb_metadata_excel   =  "./" + "_tematdb_metadata_v1.1.6-20250224.xlsx"
 file_tematdb_db_csv         =  DIR_10_tematdb_converted_to_csv + "tematdb_v1.1.6_completeTEPset.csv"
 file_tematdb_db_extZT_csv   =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedZTset_dT2K.csv"
-file_tematdb_error_csv      =  DIR_40_tematdb_ZT_error         + "ZT_error.csv"
+file_tematdb_error_csv      =  DIR_40_tematdb_ZT_error         + "ZT_error_table_dropna.csv"
 
 df_tematdb_meta             = load_excel( file_tematdb_metadata_excel, 'list')
 df_tematdb_csv              = load_csv(file_tematdb_db_csv)

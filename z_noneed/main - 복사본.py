@@ -4,7 +4,7 @@ Created on Thu Mar 30 17:24:07 2023
 
 @author: cta4r
 
-This is the program to visualize 
+This is the program is 'streamlit run main.py` for tematDb
 
 """
 
@@ -34,29 +34,24 @@ from pykeri.byungkiryu import byungkiryu_util as br
 # from library.tematdb_util import get_Ts_TEPZT
 from library.tematdb_util import draw_mat_teps, tep_generator_from_excel_files
 from library.draw_ZT_errors_with_mat import draw_mat_ZT_errors, draw_ZT_error_correlation, draw3QQ, draw4QQ
-# from library.draw_ZT_errors_with_mat import draw_mat_ZT_errors, , draw3QQ, draw4QQ
 from library.dev_performance import set_singleleg_device, run_pykeri, draw_dev_perf
 
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
 
  
-# @st.cache_data
+@st.cache_data
 def load_csv(filepath):
     return pd.read_csv(filepath)
 
-# @st.cache_data
+@st.cache_data
 def load_excel(filepath,sheet_name):
     return pd.read_excel(filepath,sheet_name=sheet_name)
 
-# @st.cache_data
+@st.cache_data
 def load_feather(filepath):
     return pd.read_feather(filepath)
 
 
-
-# @st.cache_data
-# def load_map():
-    # return pd.read_excel("./map/"+"map_info_dataframe.xlsx",sheet_name='test')  
 
 
 
@@ -104,6 +99,8 @@ with tab_link:
 with tab_about:   
     # Regarding KERI Info
     tab_contents_about.show_me()
+    # tab_contents_about.show_map()
+    tab_contents_about.show_map_and_collaboration()
     tab_contents_about.show_about()
 
      
@@ -142,8 +139,8 @@ df_tematdb_csv["tepvalue"]  = df_tematdb_csv["tepvalue"].apply(lambda x: f"{x:.6
  
 with st.sidebar:
     st.subheader(":red[Select TE Mat. DB]")
-    display_options =['teMatDb','teMatDb_expt (disabled)','Starrydata (disabled)']
-    real_options    =['teMatDb','disabled','disabled']
+    display_options =['teMatDb','teMatDb_expt (disabled)','Starrydata2 (disabled)']
+    real_options    =['teMatDb','disabled','Starrydata2']
     
     selected_db_label  = st.radio( 'Select :red[Thermoelectric DB] :',
         options=display_options, 
@@ -154,17 +151,27 @@ with st.sidebar:
     
     
     if db_mode == 'disabled':
-        st.warning("⚠️ `teMatDb_expt` is currently not available.")
-        st.warning("⚠️ 'Starrydata2' works only in local environments: using [main2_local_version.py].")
+        st.warning("⚠️'teMatDb_expt` is currently not available.")
+        st.warning("⚠️'Starrydata2` works only in local environments.")
         st.stop()  # 선택되었을 경우 이후 코드 실행 방지
     if db_mode == 'Starrydata2':
-        st.warning("⚠️ 'Starrydata2' works only in local environments. "
-                   "Due to file size limitations, it cannot be loaded in Streamlit Cloud. "
+        st.warning("⚠️ 'Starrydata2` works only in local environments.")
+        st.warning("🚫 Due to file size limitations, it cannot be loaded in Streamlit Cloud. "
                    "If needed, you can contact me to download the required files from a private link (to be announced).")
-        confirm_run = st.checkbox("I understand the above and wish to proceed with loading Starrydata2.", value=False)
-        if not confirm_run:
-            st.stop()
-        
+
+        confirm_run1 = st.checkbox("I understand the above and wish to proceed with loading Starrydata2.", value=False)
+        if not confirm_run1:
+            st.stop()     
+            
+        password = st.text_input("🔒Enter access password to proceed:", type="password")
+        if password != st.secrets["credentials"]["starry_pw"]:
+            st.error("❌ Incorrect password. Access denied.")
+            st.stop()   
+            
+        confirm_run2 = st.checkbox("🛑 Stop! Think One more time. It can be broken. Be careful..!!", value=False)
+        if not confirm_run2:
+            st.stop()     
+
     
     if (db_mode == 'teMatDb'):
         
@@ -221,10 +228,9 @@ with st.sidebar:
     elif (db_mode == 'Starrydata2'):
         
         prefix = "20250210_rawdata"
+        PATh_starry   = "./postprocessed_Starrydata2_20250210_rawdata__analyzed20250507/"
         
-        # PATH_metadata = "../030 starrydata2502 to csv and filter  -- 20250210"
-        PATh_starry   = "../030 starrydata2502 to csv and filter  -- 20250506/"
-        # PATH_metadata = "../030 starrydata2502 to csv and filter  -- 20250506"
+        
         PATH_metadata = PATh_starry + "/999_Starrydata2_rawdata_meta/"
         PATH_metadata = PATH_metadata +"_Starrydata2_20250201_rawdata_meta_ZTfilterable_.xlsx"
         df_starry_meta0 = load_excel(PATH_metadata, sheet_name='20250201_rawdata', )       
@@ -232,6 +238,7 @@ with st.sidebar:
         df_db_meta.index = list(df_db_meta.sample_id.copy())
         df_db_meta['TF_mat_complete'] = df_db_meta['pykeri_TEPZT_readable']
         df_db_meta['doi'] = df_db_meta['DOI']
+
         
         PATH_tep_feather  = PATh_starry+"100_teps/"
         df_alpha0 = load_feather(PATH_tep_feather+"20250201_rawdata_alpha.feather")
@@ -248,7 +255,7 @@ with st.sidebar:
         
         
         PATH_exTEP = PATh_starry+"300_extended_teps/"
-        PATH_exTEP = PATH_exTEP  +"extendedZTset_2K.feather"
+        PATH_exTEP = PATH_exTEP  +"extendedZTset_4K.feather"
         # PATH_exTEP = PATH_exTEP  +"extendedTEPset_2K__20250506_180300.feather"
         df_db_extended_csv = load_feather(PATH_exTEP )
         df_db_extended_csv = df_db_extended_csv[ df_db_extended_csv.is_Temp_in_autoTcTh_range ]

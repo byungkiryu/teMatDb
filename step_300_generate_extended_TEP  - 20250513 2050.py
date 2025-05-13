@@ -72,10 +72,11 @@ def get_df_extended_tep_sample(sample_id):
                   MatProp.OPT_EXTEND_LEFT_TO:1,          # ok to 0 Kelvin
                   MatProp.OPT_EXTEND_RIGHT_BY:2000}        # ok to +50 Kelvin from the raw data
 
-    TF_mat_complete, mat = tep_generator_from_excel_files(sample_id, interp_opt)
-        
+    TF_matzt_complete, mat = tep_generator_from_excel_files(sample_id, interp_opt)
+    df = pd.DataFrame()
+
     try:
-        df = pd.DataFrame()
+        
         
         # autoTcTh_buffer_dT = 15
         # dT_unit = 2
@@ -88,6 +89,8 @@ def get_df_extended_tep_sample(sample_id):
         Tmax = max( autoTh, ztTh ) + autoTcTh_buffer_dT
         
         Tmin_floor = math.floor(Tmin/dT_unit)*dT_unit
+        ## 외삽을 1까지 하는데, 여기서 음수 혹은 0도까지 dT_extend하면 충돌, 따라서 dT_unit을 max로 설정
+        Tmin_floor = max( Tmin_floor, dT_unit)  
         Tmax_ceil  = math.ceil( Tmax/dT_unit)*dT_unit ## 정수
         dT_extended = np.arange(Tmin_floor, Tmax_ceil+1, dT_unit )
         
@@ -105,9 +108,10 @@ def get_df_extended_tep_sample(sample_id):
         ZT    = Z*dT_extended
         RK    = rho*kappa
         # Lorenz= RK/dT_extended
-
-        
+    
         df['sample_id'] = [sample_id]*len(dT_extended)
+        # df['TF_matzt_complete'] = TF_matzt_complete
+
         df['Temperature'] = dT_extended.copy()
         df['alpha'] = alpha
         df['rho']   = rho

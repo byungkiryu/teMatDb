@@ -124,6 +124,7 @@ df_tep_all['dbversion'] = dbversion
 df_tep_all['dbversionlabel'] = dbversionlabel
 df_tep_all['update']  = datetimeupdate
 df_tep_all['pykeri_compatible'] = True
+df_tep_all['TF_matzt_complete'] = True
 
 df_tep_all.to_csv(DIR_10_tematdb_converted_to_csv+ dbversionlabel+'.csv',index=False )
 df_tep_all.to_csv(DIR_10_tematdb_converted_to_csv+ dbversionshort+'.csv',index=False )
