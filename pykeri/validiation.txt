@@ -1,0 +1,4 @@
+Wed Apr 11 2018:
+	1. fast_run_with_max_efficiency(), fast_run_with_max_power() 는 I-iteration을 T-iteration과 동시 진행하며 빠름.
+	2. 계산결과 비교 결과, relative error (= (f1-f2)/f2) ~ 0.1%, stdev.s ~ ~0.1%로 확인
+	3. power 에러 0.1% 보다, efficiency와 QhA 쪽 에러가 0.353%로 더 큼.

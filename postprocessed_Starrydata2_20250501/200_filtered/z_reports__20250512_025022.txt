@@ -1,0 +1,12 @@
+Date: 2025-05-12 02:57:50.588481
+   rawdata from starry: starrydata_dataset_250501-0300
+   read separate tep rawdata from csv
+   check and filter data
+   started:  20250512_025022
+   finished: 20250512_025750
+   unique [sample_id, SID] pairs
+   --be sure that some sample_id duplicated with different SIDs
+   number of data before filtering =   57035
+   number of pykeri mat tep readble =   18292
+   number of data filtered      =   15246
+Total converting time = 448.6 sec
