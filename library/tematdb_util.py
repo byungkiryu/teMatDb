@@ -30,7 +30,7 @@ formattedDate, yyyymmdd, HHMMSS = br.now_string()
 
 from matplotlib import pyplot as plt
 
-
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def draw_mat_teps(mat, label_db="", label_sample_id="", label_DOI=""):
 
@@ -255,19 +255,12 @@ def get_Zs_interp(mat, Ts_TEPZT):
     Z_raw_on_Ts_TEPZT    = mat.ZT(Ts_TEPZT) / Ts_TEPZT   
     return Z_raw_on_Ts_TEPZT, Z_TEP_on_Ts_TEPZT
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 
-def tep_generator_from_excel_files(sampleid, interp_opt):    
-    # version = "v1.0.0"
-    DIR_tematdb = "./data_00_tematdb_raw_excel/"
-    # filename1 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,1,50)
-    # filename2 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,51,100)
-    # filename3 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,101,150)
-    # filename4 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,151,200)
-    # filename5 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,201,250)
-    # filename6 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,251,300)
-    # filename7 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,301,350)
-    # filename8 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,351,400)
-    # filename9 = "_tematdb_tep_excel_{:s}_{:05d}-{:05d}.xlsx".format(version,401,450)
+def tep_generator_from_excel_files(sample_id, data_000_tematdb_raw_excel, interp_opt):
+    HERE = os.path.dirname(os.path.abspath(__file__))
+    DIR_tematdb = HERE+"/../"+data_000_tematdb_raw_excel
+
     files = ['_tematdb_tep_excel_v1.1.6_00001-00050.xlsx',
              '_tematdb_tep_excel_v1.1.6_00051-00100.xlsx',
              '_tematdb_tep_excel_v1.1.6_00101-00150.xlsx',
@@ -278,30 +271,19 @@ def tep_generator_from_excel_files(sampleid, interp_opt):
              '_tematdb_tep_excel_v1.1.6_00351-00400.xlsx',
              '_tematdb_tep_excel_v1.1.6_00401-00450.xlsx']
     
-    # files = ['_tematdb_tep_excel_v1.0.0_00001-00050_confirmed_230330.xlsx',
-    #   '_tematdb_tep_excel_v1.0.0_00051-00100_confirmed_230411.xlsx',
-    #   '_tematdb_tep_excel_v1.0.0_00101-00150_confirmed_220606.xlsx',
-    #   '_tematdb_tep_excel_v1.0.0_00151-00200_confirmed_230331.xlsx',
-    #   '_tematdb_tep_excel_v1.0.0_00201-00250_confirmed_230407.xlsx',
-    #   '_tematdb_tep_excel_v1.0.0_00251-00300_confirmed_230331.xlsx',
-    #   '_tematdb_tep_excel_v1.0.0_00301-00350_confirmed_220606.xlsx',
-    #   '_tematdb_tep_excel_v1.0.0_00351-00400_confirmed_220606.xlsx',
-    #   '_tematdb_tep_excel_v1.0.0_00401-00450_confirmed_230330.xlsx']
-    # files = os.listdir(DIR_tematdb)
-    
-    fileindex = int((sampleid-1)/50)
+    fileindex = int((sample_id-1)/50)
     filename = files[fileindex]
-    sheetname = "#{:05d}".format(sampleid)        
+    sheetname = "#{:05d}".format(sample_id)        
     
     try:
         mat = TEProp_xls.from_dict({'xls_filename': DIR_tematdb+filename,
-                                'sheetname': sheetname, 'color': (sampleid/255, 0/255, 0/255)} ) 
+                                'sheetname': sheetname, 'color': (sample_id/255, 0/255, 0/255)} ) 
         TF_mat_complete = True     
         mat.set_interp_opt(interp_opt)
-        print(sampleid, "read successfully by pykeri!!")
+        print(sample_id, "read successfully by pykeri!!")
         return TF_mat_complete, mat
     except:
-        print(filename, sampleid, 'data set is incompelete or empty')
+        print(filename, sample_id, 'data set is incompelete or empty')
         TF_mat_complete = False
         mat = False        
         return TF_mat_complete, mat
