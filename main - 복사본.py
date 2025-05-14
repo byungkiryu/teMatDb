@@ -32,23 +32,23 @@ from pykeri.byungkiryu import byungkiryu_util as br
 
         
 # from library.tematdb_util import get_Ts_TEPZT
-from library.tematdb_util import draw_mat_teps, tep_generator_from_excel_files
+from library.tematdb_util import draw_mat_teps, tep_generator_from_excel_files, make_doi_url
 from library.draw_ZT_errors_with_mat import draw_mat_ZT_errors, draw_ZT_error_correlation, draw3QQ, draw4QQ
 from library.dev_performance import set_singleleg_device, run_pykeri, draw_dev_perf
 
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
 
  
-@st.cache_data
+# @st.cache_data
 def load_csv(filepath):
     return pd.read_csv(filepath )
     # return pd.read_csv(filepath,  encoding='utf-8-sig')
 
-@st.cache_data
+# @st.cache_data
 def load_excel(filepath,sheet_name):
     return pd.read_excel(filepath,sheet_name=sheet_name)
 
-@st.cache_data
+# @st.cache_data
 def load_feather(filepath):
     return pd.read_feather(filepath)
 
@@ -118,12 +118,13 @@ dbname = 'tematdb'
 dbversion = "v1.1.6"
 
 ## DIR setting
-DIR_00_tematdb_raw_excel         =  "data_00_tematdb_raw_excel/"
-DIR_10_tematdb_converted_to_csv  =  "data_10_tematdb_csv_converted/"
-DIR_30_tematdb_extTEP_csv        =  "data_30_tematdb_extTEP_csv/"
-DIR_40_tematdb_ZT_error          =  "data_40_tematdb_ZT_error/"
+DIR_00_tematdb_raw_excel         =  "data_000_tematdb_raw_excel/"
+DIR_10_tematdb_converted_to_csv  =  "data_100_tematdb_csv_converted/"
+DIR_30_tematdb_extTEP_csv        =  "data_300_tematdb_extTEP_csv/"
+DIR_40_tematdb_ZT_error          =  "data_400_tematdb_ZT_error/"
 
-file_tematdb_metadata_excel   =   "_tematdb_metadata_v1.1.6-20250224.xlsx"
+# file_tematdb_metadata_excel   =   "_tematdb_v1.1.6_metadata-20250224.xlsx"
+file_tematdb_metadata_excel   =   "_tematdb_v1.1.6_metadata-20250514.xlsx"
 file_tematdb_db_csv         =  DIR_10_tematdb_converted_to_csv + "tematdb_v1.1.6_completeTEPset.csv"
 file_tematdb_db_extZT_csv   =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedZTset_dT2K.csv"
 file_tematdb_error_csv      =  DIR_40_tematdb_ZT_error         + "ZT_error_table_dropna.csv"
@@ -204,10 +205,11 @@ with st.sidebar:
         
         df_db_meta_sample_id = df_db_meta[ df_db_meta['sample_id'] == sample_id]
         DOI = df_db_meta_sample_id.DOI.iloc[0]
-        DOIaddress  = 'http://www.DOI.org/{}'.format(DOI)
-        link_DOI    = '[DOI: {}](http://www.DOI.org/{})'.format(DOI,DOI)
+        DOIaddress = make_doi_url(DOI)
+        link_DOI = '[DOI: {}]({})'.format(DOI,DOIaddress)
         st.markdown(link_DOI, unsafe_allow_html=True)
         st.code(DOIaddress)
+        
         corrauthor     = df_db_meta_sample_id.Corresponding_author_main.iloc[0]
         corrinstitute  = df_db_meta_sample_id.Corresponding_author_institute.iloc[0] 
         corremail      = df_db_meta_sample_id.Corresponding_author_email.iloc[0] 
@@ -218,7 +220,7 @@ with st.sidebar:
         interp_opt = {MatProp.OPT_INTERP:MatProp.INTERP_LINEAR,\
                       MatProp.OPT_EXTEND_LEFT_TO:1,          # ok to 0 Kelvin
                       MatProp.OPT_EXTEND_RIGHT_BY:2000}        # ok to +50 Kelvin from the raw data
-        TF_mat_complete, mat = tep_generator_from_excel_files(sample_id, interp_opt)
+        TF_mat_complete, mat = tep_generator_from_excel_files(sample_id, DIR_00_tematdb_raw_excel, interp_opt)
     
         label_db = "DB: {}".format(db_mode)
         label_sample_id = "sample_id: {}".format(sample_id)
@@ -285,8 +287,12 @@ with st.sidebar:
         
         df_db_meta_sample_id = df_db_meta[ df_db_meta['sample_id'] == sample_id] 
         DOI = df_db_meta_sample_id.DOI.iloc[0]
-        DOIaddress = 'http://www.DOI.org/{}'.format(DOI)
-        link_DOI = '[DOI: {}](http://www.DOI.org/{})'.format(DOI,DOI)
+        # DOIaddress = 'http://www.DOI.org/{}'.format(DOI)
+        # link_DOI = '[DOI: {}](http://www.DOI.org/{})'.format(DOI,DOI)
+        # st.markdown(link_DOI, unsafe_allow_html=True)
+        # st.code(DOIaddress)        
+        DOIaddress = make_doi_url(DOI)
+        link_DOI = '[DOI: {}]({})'.format(DOI,DOIaddress)
         st.markdown(link_DOI, unsafe_allow_html=True)
         st.code(DOIaddress)
        

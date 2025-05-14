@@ -41,7 +41,8 @@ formattedDate, yyyymmdd, HHMMSS = br.now_string()
  
 @st.cache_data
 def load_csv(filepath):
-    return pd.read_csv(filepath)
+    return pd.read_csv(filepath )
+    # return pd.read_csv(filepath,  encoding='utf-8-sig')
 
 @st.cache_data
 def load_excel(filepath,sheet_name):
@@ -117,15 +118,15 @@ dbname = 'tematdb'
 dbversion = "v1.1.6"
 
 ## DIR setting
-DIR_00_tematdb_raw_excel         =  "./data_00_tematdb_raw_excel/"
-DIR_10_tematdb_converted_to_csv  =  "./data_10_tematdb_csv_converted/"
-DIR_30_tematdb_extTEP_csv        =  "./data_30_tematdb_extTEP_csv/"
-DIR_40_tematdb_ZT_error          =  "./data_40_tematdb_ZT_error/"
+DIR_00_tematdb_raw_excel         =  "data_00_tematdb_raw_excel/"
+DIR_10_tematdb_converted_to_csv  =  "data_10_tematdb_csv_converted/"
+DIR_30_tematdb_extTEP_csv        =  "data_30_tematdb_extTEP_csv/"
+DIR_40_tematdb_ZT_error          =  "data_40_tematdb_ZT_error/"
 
-file_tematdb_metadata_excel   =  "./" + "_tematdb_metadata_v1.1.6-20250224.xlsx"
+file_tematdb_metadata_excel   =   "_tematdb_metadata_v1.1.6-20250224.xlsx"
 file_tematdb_db_csv         =  DIR_10_tematdb_converted_to_csv + "tematdb_v1.1.6_completeTEPset.csv"
 file_tematdb_db_extZT_csv   =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedZTset_dT2K.csv"
-file_tematdb_error_csv      =  DIR_40_tematdb_ZT_error         + "ZT_error.csv"
+file_tematdb_error_csv      =  DIR_40_tematdb_ZT_error         + "ZT_error_table_dropna.csv"
 
 df_tematdb_meta             = load_excel( file_tematdb_metadata_excel, 'list')
 df_tematdb_csv              = load_csv(file_tematdb_db_csv)
@@ -202,11 +203,11 @@ with st.sidebar:
             label_visibility="collapsed")   
         
         df_db_meta_sample_id = df_db_meta[ df_db_meta['sample_id'] == sample_id]
-        doi = df_db_meta_sample_id.DOI.iloc[0]
-        doiaddress  = 'http://www.doi.org/{}'.format(doi)
-        link_doi    = '[DOI: {}](http://www.doi.org/{})'.format(doi,doi)
-        st.markdown(link_doi, unsafe_allow_html=True)
-        st.code(doiaddress)
+        DOI = df_db_meta_sample_id.DOI.iloc[0]
+        DOIaddress  = 'http://www.DOI.org/{}'.format(DOI)
+        link_DOI    = '[DOI: {}](http://www.DOI.org/{})'.format(DOI,DOI)
+        st.markdown(link_DOI, unsafe_allow_html=True)
+        st.code(DOIaddress)
         corrauthor     = df_db_meta_sample_id.Corresponding_author_main.iloc[0]
         corrinstitute  = df_db_meta_sample_id.Corresponding_author_institute.iloc[0] 
         corremail      = df_db_meta_sample_id.Corresponding_author_email.iloc[0] 
@@ -221,30 +222,36 @@ with st.sidebar:
     
         label_db = "DB: {}".format(db_mode)
         label_sample_id = "sample_id: {}".format(sample_id)
-        label_doi = '[DOI: {}]'.format(doi)    
+        label_DOI = '[DOI: {}]'.format(DOI)    
         
         st.subheader(":red[Data Filter]")
  
     elif (db_mode == 'Starrydata2'):
         
-        prefix = "20250210_rawdata"
-        PATh_starry   = "./postprocessed_Starrydata2_20250210_rawdata__analyzed20250507/"
+        # prefix = "20250210_rawdata"
+        # PATh_starry   = "./postprocessed_Starrydata2_20250210_rawdata__analyzed20250507/"
+        prefix = "20250501_rawdata"
+        # PATh_starry   = "./postprocessed_Starrydata2_20250501_rawdata__analyzed20250512/"
+        PATh_starry   = "postprocessed_Starrydata2_20250501/"
+        
         
         
         PATH_metadata = PATh_starry + "/999_Starrydata2_rawdata_meta/"
-        PATH_metadata = PATH_metadata +"_Starrydata2_20250201_rawdata_meta_ZTfilterable_.xlsx"
-        df_starry_meta0 = load_excel(PATH_metadata, sheet_name='20250201_rawdata', )       
+        # PATH_metadata = PATH_metadata +"starrydata_dataset_250501-0300_meta_samples-scZT_clas_filteres-20250512_205332.xlsx"
+        PATH_metadata = PATH_metadata +"starrydata_dataset_250501-0300_meta_samples-scZT_clas_filteres-20250513_231028.xlsx"
+        df_starry_meta0 = load_excel(PATH_metadata, "starrydata_dataset_250501-0300")      
+        df_starry_meta0 = df_starry_meta0[df_starry_meta0.TF_matzt_complete]
+        df_starry_meta0 = df_starry_meta0.sort_values(by=['classic_all_filters','cri_product_1o5'],ascending=False)  
         df_db_meta = df_starry_meta0
         df_db_meta.index = list(df_db_meta.sample_id.copy())
-        df_db_meta['TF_mat_complete'] = df_db_meta['pykeri_TEPZT_readable']
-        df_db_meta['doi'] = df_db_meta['DOI']
+        df_db_meta['TF_mat_complete'] = df_db_meta['TF_matzt_complete']
 
         
         PATH_tep_feather  = PATh_starry+"100_teps/"
-        df_alpha0 = load_feather(PATH_tep_feather+"20250201_rawdata_alpha.feather")
-        df_rho0   = load_feather(PATH_tep_feather+"20250201_rawdata_rho.feather")
-        df_kappa0 = load_feather(PATH_tep_feather+"20250201_rawdata_kappa.feather")
-        df_ZT0    = load_feather(PATH_tep_feather+"20250201_rawdata_ZT.feather")
+        df_alpha0 = load_feather(PATH_tep_feather+f"{prefix}_alpha.feather")
+        df_rho0   = load_feather(PATH_tep_feather+f"{prefix}_rho.feather")
+        df_kappa0 = load_feather(PATH_tep_feather+f"{prefix}_kappa.feather")
+        df_ZT0    = load_feather(PATH_tep_feather+f"{prefix}_ZT.feather")
 
         for df in [df_alpha0, df_rho0, df_kappa0, df_ZT0]:
             if 'temperature' in df.columns:
@@ -254,7 +261,7 @@ with st.sidebar:
         df_db_csv = pd.concat( [df_alpha0, df_rho0, df_kappa0, df_ZT0], ignore_index=True)
         
         
-        PATH_exTEP = PATh_starry+"300_extended_teps/"
+        PATH_exTEP = PATh_starry +"300_extended_teps/"
         PATH_exTEP = PATH_exTEP  +"extendedZTset_4K.feather"
         # PATH_exTEP = PATH_exTEP  +"extendedTEPset_2K__20250506_180300.feather"
         df_db_extended_csv = load_feather(PATH_exTEP )
@@ -263,7 +270,7 @@ with st.sidebar:
         
         
         file_tematdb_error_csv = PATh_starry+"400_ZT_error/"
-        file_tematdb_error_csv = file_tematdb_error_csv+"ZT_error_table.csv"
+        file_tematdb_error_csv = file_tematdb_error_csv+"ZT_error_table_dropna.csv"
         df_db_error0 = pd.read_csv(file_tematdb_error_csv)
         df_db_error = pd.merge( df_db_error0, df_db_meta, on='sample_id', how='left')
         df_db_error.index = list(df_db_error.sample_id.copy())        
@@ -277,17 +284,12 @@ with st.sidebar:
             label_visibility="collapsed")   
         
         df_db_meta_sample_id = df_db_meta[ df_db_meta['sample_id'] == sample_id] 
-        doi = df_db_meta_sample_id.DOI.iloc[0]
-        doiaddress = 'http://www.doi.org/{}'.format(doi)
-        link_doi = '[DOI: {}](http://www.doi.org/{})'.format(doi,doi)
-        st.markdown(link_doi, unsafe_allow_html=True)
-        st.code(doiaddress)
-        # corrauthor = df_db_meta_sampleid.Corresponding_author_main.iloc[0]
-        # corrinstitute  = df_db_meta_sampleid.Corresponding_author_institute.iloc[0] 
-        # corremail  = df_db_meta_sampleid.Corresponding_author_email.iloc[0] 
-        # st.markdown("First Author: :red[need to update]")
-        # st.markdown("Correspondence: {}".format(corrauthor)) 
-        # st.markdown("Institute: {}".format(corrinstitute))         
+        DOI = df_db_meta_sample_id.DOI.iloc[0]
+        DOIaddress = 'http://www.DOI.org/{}'.format(DOI)
+        link_DOI = '[DOI: {}](http://www.DOI.org/{})'.format(DOI,DOI)
+        st.markdown(link_DOI, unsafe_allow_html=True)
+        st.code(DOIaddress)
+       
         
         df_alpha_sample_id = df_alpha0[ df_alpha0.sample_id == sample_id]
         df_rho_sample_id   = df_rho0[   df_rho0.sample_id == sample_id]
@@ -329,7 +331,7 @@ with st.sidebar:
     
         label_db = "DB: {}".format(db_mode)
         label_sample_id = "sample_id: {}".format(sample_id)
-        label_doi = '[DOI: {}]'.format(doi)     
+        label_DOI = '[DOI: {}]'.format(DOI)     
         
         st.subheader(":red[Data Filter]")
     else:
@@ -378,14 +380,13 @@ with tab_1_tep:
     # st.header("[db_mode  = :blue[{}]]".format(db_mode) )
     st.header(":blue[I. DB MetaData Table]")
     with st.expander("See material metadata:", expanded=True):
-        st.write(df_db_meta)  
-        # st.dataframe(df_db_meta)     
+        st.write(df_db_meta)     
 
     st.header(":blue[II. Material Data] ")
     st.subheader(":red[[db_mode  = :blue[{}]]]".format(db_mode) + ":red[[sample_id = :blue[{}]]]".format( sample_id))
     
     st.subheader(":red[Material Summary]")
-    st.markdown(link_doi, unsafe_allow_html=True)
+    st.markdown(link_DOI, unsafe_allow_html=True)
     
     if (db_mode == 'teMatDb'):
         colnames = ['sample_id', 'DOI', 'JOURNAL', 'YEAR',
@@ -396,13 +397,12 @@ with tab_1_tep:
             st.markdown("{}: :blue[{}]".format(colname, df_db_meta_sample_id[colname].iloc[0]))
 
     if (db_mode == 'Starrydata2'):
-        colnames = ['db',
-                    'dbversion', 
-                    'sample_id', 'SID', 'DOI', 
+        colnames = ['sample_id', 'SID', 'DOI', 
+                    # 'db',
+                    #         'dbversion',                     
                     # 'year',
                     'published',
-                    # 'db', 
- 
+                    # 'db',  
                     'composition',
                     # 'df_tep4_sampleids','df_eta4_sampleids','df_tep_extended_sampleids'
                     ]
@@ -430,9 +430,9 @@ with tab_1_tep:
         st.write(':red[TEP is invalid because TEP set is incomplete..]')    
     if TF_mat_complete:        
         fig1, fig2 = draw_mat_teps(mat, 
-                                   label_db=label_db, 
+                                   label_db=label_db,  
                                    label_sample_id=label_sample_id, 
-                                   label_doi=label_doi
+                                   label_DOI=label_DOI
                                    )
         with st.expander("See TEP curves:", expanded=True):        
             st.pyplot(fig1)   
@@ -484,7 +484,7 @@ with tab_1_tep:
             with st.expander("How to calculateSee Lp errors and etc...:", expanded=False):        
                 st.markdown(":red[error was calculated blah blbah using following equations (to be filled later)]")
                 
-            fig3 = draw_mat_ZT_errors(mat, label_db=label_db, label_sample_id=label_sample_id, label_doi=label_doi)
+            fig3 = draw_mat_ZT_errors(mat, label_db=label_db, label_sample_id=label_sample_id, label_DOI=label_DOI)
             st.pyplot(fig3)        
             st.caption("Figure. ZT error analysis of :blue[sample_id={}] in :blue[{}].".format(sample_id,db_mode))
 
@@ -543,7 +543,7 @@ with tab_1_tep:
         # dev = set_singleleg_device(df_db_csv,sampleid,leg_length,leg_area,N_leg,Th,Tc)
         df_dev_run_currents_result, df_dev_run_powMax_result, df_dev_run_etaOpt_result = run_pykeri(dev, sample_id,leg_length,leg_area,N_leg,Th,Tc)
         fig4 = draw_dev_perf(df_dev_run_currents_result, df_dev_run_powMax_result, df_dev_run_etaOpt_result,
-                             label_db, sample_id, label_doi)
+                             label_db, sample_id, label_DOI)
         st.pyplot(fig4)
         with st.expander("See Material performance curves:", expanded=True):        
             st.write("currents performances")
@@ -575,7 +575,7 @@ with tab_2_scZT:
     error_criteria_list = []
     sample_id_list_df_db_error_criteria = []
     df4_db_error_filtered = df_db_error.copy()
-    df5_db_error_anomaly = df_db_error.copy()
+    
     for cri_col, cri_val in zip(cri_cols, cri_vals):   
         error_criteria = np.abs( df_db_error[cri_col] ) > cri_val 
         error_criteria_list.append(error_criteria.copy())
@@ -584,7 +584,7 @@ with tab_2_scZT:
         df_db_error_criteria.set_index('sample_id', inplace=True, drop=False)
         
         df4_db_error_filtered = df4_db_error_filtered[ np.abs( df4_db_error_filtered[cri_col] ) <= cri_val ].copy()
-        df5_db_error_anomaly  = df5_db_error_anomaly[ np.abs( df5_db_error_anomaly[cri_col] ) > cri_val ].copy()
+        
         
         cri_str = ":red[Noisy samples: {} > {:.2f}]".format(cri_col, cri_val)
         st.subheader(cri_str)
@@ -611,8 +611,8 @@ with tab_2_scZT:
 
     st.subheader(":red[QQ analysis]")
     # X = df1.ZT_author_declared - df1.ZT_tep_reevaluated
-    fig_before_filter = draw3QQ(df1,df2,label_db, label_sample_id, label_doi)
-    # fig_before_filter = draw4QQ(df1,df2,label_db, label_sampleid, label_doi)
+    fig_before_filter = draw3QQ(df1,df2,label_db, label_sample_id, label_DOI)
+    # fig_before_filter = draw4QQ(df1,df2,label_db, label_sampleid, label_DOI)
     st.pyplot(fig_before_filter)
 
  
@@ -623,13 +623,14 @@ with tab_2_scZT:
     df3_df_db_extended_csv_filtered = df3_df_db_extended_csv_filtered[ df3_df_db_extended_csv_filtered.notNoisy == True ].copy()
     df3, df4 = df3_df_db_extended_csv_filtered, df4_db_error_filtered
 
-    num_sampleids_after_filtering = len( df4[ df4.TF_mat_complete ].sample_id.unique() )
+    num_sampleids_after_filtering = len( df4[ df4.notNoisy ] )
+    # num_sampleids_after_filtering = len( df4[ df4.TF_mat_complete ].sample_id.unique() 
     st.markdown("There are :blue[{}] sample_ids.".format(num_sampleids_after_filtering))
     with st.expander("See plots:", expanded=False):           
         st.subheader(":red[ZT Error Correlation]")
         draw_ZT_error_correlation(df4)    
     st.subheader(":red[QQ analysis]")
     # X = df1.ZT_author_declared - df1.ZT_tep_reevaluated
-    fig_after_filter = draw3QQ(df3,df4,label_db, label_sample_id, label_doi)
-    # fig_after_filter = draw4QQ(df3,df4,label_db, label_sampleid, label_doi)
+    fig_after_filter = draw3QQ(df3,df4,label_db, label_sample_id, label_DOI)
+    # fig_after_filter = draw4QQ(df3,df4,label_db, label_sampleid, label_DOI)
     st.pyplot(fig_after_filter)      

@@ -32,7 +32,7 @@ from pykeri.byungkiryu import byungkiryu_util as br
 
         
 # from library.tematdb_util import get_Ts_TEPZT
-from library.tematdb_util import draw_mat_teps, tep_generator_from_excel_files
+from library.tematdb_util import draw_mat_teps, tep_generator_from_excel_files, make_doi_url
 from library.draw_ZT_errors_with_mat import draw_mat_ZT_errors, draw_ZT_error_correlation, draw3QQ, draw4QQ
 from library.dev_performance import set_singleleg_device, run_pykeri, draw_dev_perf
 
@@ -66,27 +66,27 @@ st.markdown("""
             """)
 
 
-tab_1_tep, tab_2_scZT, tab_dataDist, tab_theory, tab_link, tab_about = st.tabs(["Material Property", 
+tab_1_tep, tab_2_scZT, tab_teMatDb, tab_theory, tab_link, tab_about = st.tabs(["Material Property", 
                                                  "Data Self-Consistency", 
-                                                 "Data Distribution",
+                                                 "teMatDb272",
                                                  "Theory", 
                                                  "Link", 
                                                  "About"])
 
 
-import tabs.tab_contents_datadistribution as tab_contents_datadistribution
+import tabs.tab_contents_teMatDb as tab_contents_teMatDb
 import tabs.tab_contents_theory as tab_contents_theory
 import tabs.tab_contents_link as tab_contents_link
 import tabs.tab_contents_about as tab_contents_about
 
 
-with tab_dataDist:  
+# with tab_dataDist:  
     # Regarding Data info
-    tab_contents_datadistribution.show_dataDistribution()
+    # tab_contents_datadistribution.show_dataDistribution()
     
 with tab_theory:
     # Regarding theory
-    tab_contents_theory.show_data_description()
+    # tab_contents_theory.show_data_description()
     tab_contents_theory.show_theory()
     tab_contents_theory.show_reference()
 
@@ -104,7 +104,15 @@ with tab_about:
     tab_contents_about.show_map_and_collaboration()
     tab_contents_about.show_about()
 
-     
+with tab_teMatDb:
+    st.title(":red[teMatDb272]")    
+    tab_contents_teMatDb.show_report_teMatDb272()
+    tab_contents_teMatDb.show_dataDistribution()
+    # report_path_teMatDb = "teMatDb_publication/teMatDb272_dataset_20250515/z_teMatDb_report.txt"
+    # # 파일 읽기
+    # with open(report_path_teMatDb272, "r", encoding="utf-8") as file:
+    #     report_text = file.read()
+    # st.text(report_text)
 
 
 
@@ -205,10 +213,11 @@ with st.sidebar:
         
         df_db_meta_sample_id = df_db_meta[ df_db_meta['sample_id'] == sample_id]
         DOI = df_db_meta_sample_id.DOI.iloc[0]
-        DOIaddress  = 'http://www.DOI.org/{}'.format(DOI)
-        link_DOI    = '[DOI: {}](http://www.DOI.org/{})'.format(DOI,DOI)
+        DOIaddress = make_doi_url(DOI)
+        link_DOI = '[DOI: {}]({})'.format(DOI,DOIaddress)
         st.markdown(link_DOI, unsafe_allow_html=True)
         st.code(DOIaddress)
+        
         corrauthor     = df_db_meta_sample_id.Corresponding_author_main.iloc[0]
         corrinstitute  = df_db_meta_sample_id.Corresponding_author_institute.iloc[0] 
         corremail      = df_db_meta_sample_id.Corresponding_author_email.iloc[0] 
@@ -286,8 +295,12 @@ with st.sidebar:
         
         df_db_meta_sample_id = df_db_meta[ df_db_meta['sample_id'] == sample_id] 
         DOI = df_db_meta_sample_id.DOI.iloc[0]
-        DOIaddress = 'http://www.DOI.org/{}'.format(DOI)
-        link_DOI = '[DOI: {}](http://www.DOI.org/{})'.format(DOI,DOI)
+        # DOIaddress = 'http://www.DOI.org/{}'.format(DOI)
+        # link_DOI = '[DOI: {}](http://www.DOI.org/{})'.format(DOI,DOI)
+        # st.markdown(link_DOI, unsafe_allow_html=True)
+        # st.code(DOIaddress)        
+        DOIaddress = make_doi_url(DOI)
+        link_DOI = '[DOI: {}]({})'.format(DOI,DOIaddress)
         st.markdown(link_DOI, unsafe_allow_html=True)
         st.code(DOIaddress)
        

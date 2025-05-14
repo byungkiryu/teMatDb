@@ -32,6 +32,14 @@ from matplotlib import pyplot as plt
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+def make_doi_url(doi):
+    if isinstance(doi, str):
+        if doi.startswith("http"):
+            return doi
+        else:
+            return "https://doi.org/" + doi
+    return ""
+
 def draw_mat_teps(mat, label_db="", label_sample_id="", label_DOI=""):
 
     figsize = (8,8)
