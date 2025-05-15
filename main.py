@@ -105,7 +105,6 @@ with tab_about:
     tab_contents_about.show_about()
 
 with tab_teMatDb:
-    st.title(":red[teMatDb272]")    
     tab_contents_teMatDb.show_report_teMatDb272()
     tab_contents_teMatDb.show_dataDistribution()
     # report_path_teMatDb = "teMatDb_publication/teMatDb272_dataset_20250515/z_teMatDb_report.txt"

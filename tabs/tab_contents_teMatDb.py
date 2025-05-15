@@ -76,8 +76,15 @@ def show_dataDistribution():
 
 
 def show_report_teMatDb272():
+    st.title(":red[teMatDb272]")   
+    st.markdown("👉 [Download teMatDb272](https://github.com/byungkiryu/teMatDb/tree/main/teMatDb_publication)")
+
+
     st.header(":blue[DB publication]")   
-    # 파일 읽기
+    
+    
+
+    
     with st.expander("How to constructued?", expanded=False):            
  
             
