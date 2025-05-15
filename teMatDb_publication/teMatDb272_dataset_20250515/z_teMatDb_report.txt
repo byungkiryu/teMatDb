@@ -6,12 +6,13 @@ _____Generated on: 20250515_134730
       publicate
 
   Developer: Dr. Byungki Ryu from KERI, Changwon, 51543, Republic of Korea(south)
-    data Contribution: JH Son, HJ Ihm, SJ Park
+    data Contribution: JiHui Son, Hye-Jin Lim, SuJi Park
     data Contribution: Sungjin Park, Byungki Ryu
-    data curation    : Sungjin Park, Jaywan Chung, Byungki Ryu
-    code collocation : Jaywan Chung, Byungki Ryu
-    code filter      : Byungki Ryu
-    code publication : Byungki Ryu
+    data Curation    : Sungjin Park, Jaywan Chung, Byungki Ryu
+    code Collocation : Jaywan Chung, Byungki Ryu
+    code Filter      : Byungki Ryu
+    code Publication : Byungki Ryu
+
 
   Publication        : https://github.com/byungkiryu/teMatDb    Related webpage  : https://tematdb.streamlit.app/
 
