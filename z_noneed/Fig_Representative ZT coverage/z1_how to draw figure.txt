@@ -1,0 +1,8 @@
+df = df_starry_csv[ df_starry_csv.tepname == 'kappa']
+kappa_anomaly_SIDs = df[ (df.tepvalue > 500) | (df.tepvalue < 0) ].SID.unique()
+# kappa_anomaly_SIDs = df[ (df.tepvalue < 0) ].SID.unique()
+
+df = df_starry_csv[ df_starry_csv.tepname == 'rho']
+# rho_anomaly_SIDs   = df[ (df.tepvalue > 500) | (df.tepvalue < 0) ].SID.unique()
+rho_anomaly_SIDs   = df[ (df.tepvalue < 0) ].SID.unique()
+

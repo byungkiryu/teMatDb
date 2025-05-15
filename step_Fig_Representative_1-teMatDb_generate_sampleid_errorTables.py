@@ -16,12 +16,12 @@ formattedDate, yyyymmdd, HHMMSS = br.now_string()
 ## read tematdb csv
 
 ## DIR setting
-DIR_00_tematdb_raw_excel         =  "data_00_tematdb_raw_excel/"
-DIR_10_tematdb_converted_to_csv  =  "data_10_tematdb_csv_converted/"
-DIR_30_tematdb_extTEP_csv        =  "data_30_tematdb_extTEP_csv/"
-DIR_40_tematdb_ZT_error          =  "data_40_tematdb_ZT_error/"
+DIR_00_tematdb_raw_excel         =  "data_000_tematdb_raw_excel/"
+DIR_10_tematdb_converted_to_csv  =  "data_100_tematdb_csv_converted/"
+DIR_30_tematdb_extTEP_csv        =  "data_300_tematdb_extTEP_csv/"
+DIR_40_tematdb_ZT_error          =  "data_400_tematdb_ZT_error/"
 
-file_tematdb_metadata_excel   =  "./" + "_tematdb_metadata_v1.1.6-20250224.xlsx"
+file_tematdb_metadata_excel   =  "./" + "_tematdb_v1.1.6_metadata-20250514.xlsx"
 file_tematdb_db_csv         =  DIR_10_tematdb_converted_to_csv + "tematdb_v1.1.6_completeTEPset.csv"
 file_tematdb_db_extZT_csv   =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedZTset_dT2K.csv"
 file_tematdb_error_csv      =  DIR_40_tematdb_ZT_error         + "ZT_error_table.csv"
@@ -61,7 +61,7 @@ for idx, row in enumerate(zip(cri_cols, cri_vals) ):
 # df_db_error['all_pass'] = df_db_error[cri_cols].prod(axis=1).astype(bool)
 
 for temptemp in ["","__{}".format(formattedDate)]:
-    df_db_error.to_excel(f"Figure_DB_representative_after_filtering_def/teMatDb_error_anal{temptemp}.xlsx",index=False)
+    df_db_error.to_excel(f"Fig_Representative ZT coverage/teMatDb_error_anal{temptemp}.xlsx",index=False)
 
 df_tematdb_error_anal = df_db_error.copy()
 

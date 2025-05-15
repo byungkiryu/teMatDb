@@ -1,0 +1,11 @@
+___dbvserion: starrydata_dataset_250501-0300
+___stats:     only for the top majority prop_y
+tep= alpha   ,       667925 rows,        33083 samples
+tep= rho     ,       744704 rows,        34883 samples
+tep= kappa   ,       382354 rows,        23636 samples
+tep= PF      ,       245713 rows,        16396 samples
+tep= ZT      ,       278006 rows,        19622 samples
+
+ program start   : 20250515_204744
+ program finished: 20250515_204750
+ Time elapsed    : 28.8

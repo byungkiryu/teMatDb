@@ -245,11 +245,11 @@ with st.sidebar:
         
         
         
-        PATH_metadata = PATh_starry + "/999_Starrydata2_rawdata_meta/"
+        PATH_metadata = PATh_starry + "/900_Starrydata2_rawdata_meta/"
         # PATH_metadata = PATH_metadata +"starrydata_dataset_250501-0300_meta_samples-scZT_clas_filteres-20250512_205332.xlsx"
-        PATH_metadata = PATH_metadata +"starrydata_dataset_250501-0300_meta_samples-scZT_clas_filteres-20250513_231028.xlsx"
+        PATH_metadata = PATH_metadata +"starrydata_dataset_250501-0300_meta_samples-scZT_clas_filteres-20250515_232713.xlsx"
         df_starry_meta0 = load_excel(PATH_metadata, "starrydata_dataset_250501-0300")      
-        df_starry_meta0 = df_starry_meta0[df_starry_meta0.TF_matzt_complete]
+        df_starry_meta0 = df_starry_meta0[df_starry_meta0.TF_matzt_complete == True]
         df_starry_meta0 = df_starry_meta0.sort_values(by=['classic_all_filters','cri_product_1o5'],ascending=False)  
         df_db_meta = df_starry_meta0
         df_db_meta.index = list(df_db_meta.sample_id.copy())
@@ -614,7 +614,7 @@ with tab_2_scZT:
     
     
     st.header(":blue[DB Before Filtering]")
-    num_sample_ids_before_filtering = len( df_db_error[ df_db_error.TF_mat_complete ].sample_id.unique() )
+    num_sample_ids_before_filtering = len( df_db_error[ df_db_error.TF_mat_complete ==True ].sample_id.unique() )
     st.markdown("There are :blue[{}] sampleids.".format(num_sample_ids_before_filtering))
     with st.expander("See plots:", expanded=False):   
         df1 = df_db_extended_csv
