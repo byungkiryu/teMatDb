@@ -17,10 +17,27 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 report_path_teMatDb272 = "../teMatDb_publication/teMatDb272_dataset_20250515/z_teMatDb_report.txt"
 REPORT_PATH_teMatDb272 = os.path.join(HERE, report_path_teMatDb272)
 
+
+
+def show_report_teMatDb272():
+    st.title(":red[teMatDb272]")   
+    st.markdown("👉 [Download teMatDb272](https://github.com/byungkiryu/teMatDb/tree/main/teMatDb_publication)")
+    st.header(":blue[DB publication]")           
+    with st.expander("How to constructued?", expanded=False):            
+        with open(REPORT_PATH_teMatDb272, "r", encoding="utf-8") as file:
+            report_text = file.read()
+        st.subheader(":red[Data construction infomation] (z_teMatDb_report.txt)")
+        st.text(report_text)
+
+
+
+
+
+
 def show_dataDistribution():
     dbpubs = 'teMatDb272 characteristics'
     st.header(":blue[TEP distribution]")    
-    with st.expander("See data characteristics", expanded=False):    
+    with st.expander("See data characteristics", expanded=True):    
         
         st.subheader(":green[Fig. 1 TEP and ZT distribution]")           
         img_path = os.path.join(HERE, "..", "FIG_1_representative_teMatDb_vs_Starrydata2", "figure_20250516_011802.png")
@@ -31,6 +48,10 @@ def show_dataDistribution():
                     """) 
         
         st.subheader(":green[Fig. 2 TEP digitization and ZT error] ")    
+        img_path = os.path.join(HERE, "..", "FIG_2_sampleid_43_digitization", "figure_20250516_031111.png")
+        st.image( img_path )
+        
+        
         st.markdown("(a) Digitization and continuation for sample_id = 43.") 
         st.markdown("(b) ZT-ZT plot, deviation, and its Q-Q plot") 
         st.subheader(":green[Fig. 3 ZT from Figs vs. ZT from TEPs] ")    
@@ -46,26 +67,5 @@ def show_dataDistribution():
         st.markdown(r"Thermoelectric efficiency and power plot with $\Delta$T")    
      
     return True
-
-
-def show_report_teMatDb272():
-    st.title(":red[teMatDb272]")   
-    st.markdown("👉 [Download teMatDb272](https://github.com/byungkiryu/teMatDb/tree/main/teMatDb_publication)")
-
-
-    st.header(":blue[DB publication]")   
-    
-    
-
-    
-    with st.expander("How to constructued?", expanded=False):            
- 
-            
-        with open(REPORT_PATH_teMatDb272, "r", encoding="utf-8") as file:
-            report_text = file.read()
-        st.subheader(":red[Data construction infomation] (z_teMatDb_report.txt)")
-        st.text(report_text)
-
-
 
 

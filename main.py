@@ -100,7 +100,6 @@ with tab_link:
 with tab_about:   
     # Regarding KERI Info
     tab_contents_about.show_me()
-    # tab_contents_about.show_map()
     tab_contents_about.show_map_and_collaboration()
     tab_contents_about.show_about()
 
