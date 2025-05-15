@@ -1,11 +1,11 @@
-Date: 2025-05-14 16:02:02.606006
+Date: 2025-05-15 13:03:45.143872
   dbname    :  tematdb
   dbversion :  v1.1.6
   make a single tep set for complete TEP curve digital data
 
-  start: 20250514_160054 
-  ended: 20250514_160202 
+  start: 20250515_130240 
+  ended: 20250515_130345 
 
     number of complete(valid) samples = 355 
 
-Eplased time = 70.2.sec
+Eplased time = 64.2.sec

@@ -101,25 +101,22 @@ db_mother           = f"{dbname}_{dbversion}"
 db_full_id          = f"{db_publication_id}_{dbversion}"
 
 
-filenamelist =[f"{prefix}_samples",
-               f"{prefix}_TEPcurves",
-               f"{prefix}_TEPcollocated",
+filenamelist =[f"{prefix}_samples.csv",
+               f"{prefix}_rawTEPs.csv",
+               f"{prefix}_collocatedTEPs.csv"
                ]
-# filenamelist =["metadata",
-#                "rawdata_teps",
-#                "collocated_teps",
-#                ]
-fileformatlist =["csv",
-               "csv",
-               "csv",
-               ]
+               
+file_descrption_list = ['file for sample_id metadata',
+                   'file for raw teps from figures',
+                   'file for collocated teps (formatted T, interpolated, no-extrapolated)'
+                   ]
 
 ####### sample metadata
 ####### sample metadata
 ####### sample metadata
 ####### sample metadata
 df_tematdb_sample_metadata = df_scZT_filtered[ df_scZT_filtered["cri_product"]  == True]
-col_base = ["sample_id","DOI"]
+col_base = ["sample_id"]
 df = df_tematdb_sample_metadata[ col_base ].copy()
 
 df = df.merge( df_meta, on=col_base, how='left')
@@ -135,44 +132,42 @@ df = df[col_meta]
 df.reset_index(inplace=True, drop=True)
 df_tematdb_sample_metadata = df.copy()
 filename = filenamelist[0]
-df_tematdb_sample_metadata.to_csv(db_publication_path+f"{filename}.csv", index=False, encoding="UTF-8-SIG")
-# df_tematdb_sample_metadata.to_csv(db_publication_path+f"{filename}_{formattedDate}.csv", index=False, encoding="UTF-8-SIG")
-
+df_tematdb_sample_metadata.to_csv(db_publication_path+f"{filename}", index=False, encoding="UTF-8-SIG")
 
 
 ####### complete teps
 ####### complete teps
 ####### complete teps
 ####### complete teps
-col_compelte_teps =   [  'sample_id', 'tepname', 'Temperature', 'tepvalue', 'unit', 
-                       'dbversionlabel', 'update', 'TF_matzt_complete'  ]
-df_tematdb_complete_teps = df_complete_csv[df_complete_csv['sample_id'].isin(db_publication_sample_ids)].copy()
-df_tematdb_complete_teps = df_tematdb_complete_teps[  col_compelte_teps  ].copy()
-df_tematdb_complete_teps.reset_index(inplace=True, drop=True)
+col_compelte_teps =   [  'sample_id', 'tepname', 'Temperature', 'tepvalue']
+df_tematdb_raw_teps = df_complete_csv[df_complete_csv['sample_id'].isin(db_publication_sample_ids)].copy()
 
+df_tematdb_raw_teps.reset_index(inplace=True, drop=True)
+rep_updateDate_from_excelDb_to_teMatDb = df_tematdb_raw_teps['update'].unique()[0]
+rep_dbversionlabel = df_tematdb_raw_teps['dbversionlabel'].unique()[0]
+rep_tep_units  = df_tematdb_raw_teps['unit'].unique()
+
+df_tematdb_raw_teps = df_tematdb_raw_teps[  col_compelte_teps  ].copy()
 filename = filenamelist[1]
-df_tematdb_complete_teps.to_csv(db_publication_path+f"{filename}.csv", index=False, encoding="UTF-8-SIG")
-# df_tematdb_complete_teps.to_csv(db_publication_path+f"{filename}_{formattedDate}.csv", index=False, encoding="UTF-8-SIG")
-
+df_tematdb_raw_teps.to_csv(db_publication_path+f"{filename}", index=False, encoding="UTF-8-SIG")
 
 
 
 ####### collocated teps
+####### collocated teps
+####### collocated teps
+####### collocated teps
 col_collocated_teps = ['sample_id', 'Temperature', 
-                       'alpha', 'rho', 'kappa',
-                       'RK', 'sigma', 'PF','ZT_tep_reevaluated']
+                       'alpha', 'rho', 'kappa','ZT_author_declared']
 df_tematdb_collocated_teps = df_extended_csv[df_extended_csv['sample_id'].isin(db_publication_sample_ids)].copy()
 df_tematdb_collocated_teps = df_tematdb_collocated_teps[ df_tematdb_collocated_teps['is_Temp_in_TEPZT'] == True].copy()
 
 df_tematdb_collocated_teps = df_tematdb_collocated_teps[col_collocated_teps]
-df_tematdb_collocated_teps['ZT'] = df_tematdb_collocated_teps["ZT_tep_reevaluated"].copy()
-
 df_tematdb_collocated_teps.reset_index(inplace=True, drop=True)
 
-
 filename = filenamelist[2]
-df_tematdb_collocated_teps.to_csv(db_publication_path+f"{filename}.csv", index=False, encoding="UTF-8-SIG")
-# df_tematdb_collocated_teps.to_csv(db_publication_path+f"{filename}_{formattedDate}.csv", index=False, encoding="UTF-8-SIG")
+df_tematdb_collocated_teps.to_csv(db_publication_path+f"{filename}", index=False, encoding="UTF-8-SIG")
+
 
 
 
@@ -181,58 +176,107 @@ df_tematdb_collocated_teps.to_csv(db_publication_path+f"{filename}.csv", index=F
 
 num_sample_id        = df_tematdb_sample_metadata['sample_id'].nunique()
 num_DOI              = df_tematdb_sample_metadata['DOI'].nunique()
-len_complete_teps    = len( df_tematdb_complete_teps )
-len_collocated_teps  = len( df_tematdb_collocated_teps )
+len_rawTEPs          = len( df_tematdb_raw_teps   )
+len_rawalpha         = len( df_tematdb_raw_teps[ df_tematdb_raw_teps['tepname']== 'alpha']   )
+len_rawrho           = len( df_tematdb_raw_teps[ df_tematdb_raw_teps['tepname']== 'rho']   )
+len_rawkappa         = len( df_tematdb_raw_teps[ df_tematdb_raw_teps['tepname']== 'kappa']   )
+len_rawZT            = len( df_tematdb_raw_teps[ df_tematdb_raw_teps['tepname']== 'ZT']   )
+len_collocatedTEPs   = len( df_tematdb_collocated_teps )
 
 
 
 
 
 report_dict = {}
-report_dict['scZT_filter'] = cri_product_criteriastring
+report_dict['db_publication_id'] = db_publication_id
+report_dict['Update Date from excel to csv'] = rep_updateDate_from_excelDb_to_teMatDb
+report_dict['formattedDate']  = formattedDate
+
 report_dict['dbname'] = dbname
 report_dict['dbversion'] = dbversion
 report_dict['db_mother'] = db_mother
-report_dict['db_publication_id'] = db_publication_id
-report_dict['db_full_id'] = db_full_id
 
+report_dict['db_full_id'] = db_full_id
+report_dict['rep_dbversionlabel'] = rep_dbversionlabel
+report_dict['rep_tep_units'] = rep_tep_units
+
+rep_tep_units
 
 data_dict = {}
+data_dict['scZT_filter'] = cri_product_criteriastring
 data_dict['num_sample_id (samples)'] = num_sample_id
 data_dict['num_DOI (papers)'] = num_DOI
-data_dict['len_complete_teps'] = len_complete_teps
-data_dict['len_collocated_teps'] = len_collocated_teps
+data_dict['len_rawTEPs'] = len_rawTEPs
+data_dict['len_rawalpha'] = len_rawalpha
+data_dict['len_rawrho'] = len_rawrho
+data_dict['len_rawkappa'] = len_rawkappa
+data_dict['len_rawZT'] = len_rawZT
+data_dict['len_collocatedTEPs'] = len_collocatedTEPs
 data_dict['dT_unit for temp collocation'] = 2
 
-file_dict = {}
-file_dict['filename for sample_id metadata']    = filenamelist[0] + "." + fileformatlist[0]
-file_dict['filename for rawdata  teps']         = filenamelist[1] + "." + fileformatlist[1]
-file_dict['filename for collated teps']         = filenamelist[2] + "." + fileformatlist[2]
-file_dict['formattedDate']  = formattedDate
+
+
+
 
 
 report_string = ""
 report_string = report_string + "_____Generated on: {}\n".format(formattedDate)
 # report_string = report_string + "_____teMatDb by Byungki Ryu from KERI, Korea\n"
-report_string = report_string + "  Publicate teMatDb for thermoelectric property curves: {}\n".format(db_publication_id)
+report_string = report_string + "  DB pulbictation for thermoelectric property curves: {}\n".format(db_publication_id)
+report_string = report_string + "    An untral-high quality self-consistent TEP sets\n"
+report_string = report_string + "      digitize (double check at least, triple check for some cases) \n"
+report_string = report_string + "      transform - collocate (extend) - filter - finalize\n"
+report_string = report_string + "      publicate\n"
 report_string = report_string + "\n"
 report_string = report_string + "  Developer: Dr. Byungki Ryu from KERI, Changwon, 51543, Republic of Korea(south)\n"
+report_string = report_string + "    data Contribution: JH Son, HJ Ihm, SJ Park\n"
+report_string = report_string + "    data Contribution: Sungjin Park, Byungki Ryu\n"
+report_string = report_string + "    data curation    : Sungjin Park, Jaywan Chung, Byungki Ryu\n"
+report_string = report_string + "    code collocation : Jaywan Chung, Byungki Ryu\n"
+report_string = report_string + "    code filter      : Byungki Ryu\n"
+report_string = report_string + "    code publication : Byungki Ryu\n"
+report_string = report_string + "\n"
+report_string = report_string + "  Publication        : https://github.com/byungkiryu/teMatDb"
+report_string = report_string + "    Related webpage  : https://tematdb.streamlit.app/\n"
 report_string = report_string + "\n"
 report_string = report_string + "  DB info\n"
 for key, value in report_dict.items():
-    report_line = f"    {key}: {value}"
+    report_line = "    {:30}: {}".format(key,value)
     report_string = report_string + report_line + "\n"
 
 report_string = report_string + "\n"
 report_string = report_string + "  Data stats of dataset for TEP (thermoelectric properties)\n"
 for key, value in data_dict.items():
-    report_line = f"    {key}: {value}"
+    report_line = "    {:30}: {}".format(key,value)
     report_string = report_string + report_line + "\n"
 
 report_string = report_string + "\n"
 report_string = report_string + "  Filename information\n"
-for description, filename in file_dict.items():
-    report_line = "    {:40}: {}".format(filename, description)
+
+# filenamelist
+# file_descrption_list
+df_tematdb_list = [df_tematdb_sample_metadata,
+                   df_tematdb_raw_teps,
+                   df_tematdb_collocated_teps
+                   ]
+
+for idx in range(3):
+    filename    = filenamelist[idx]
+    description = file_descrption_list[idx]
+    df_each     = df_tematdb_list[idx]
+    
+    report_line = "    {:30}: {}\n".format(filename, description)
+    # report_line = report_line+"       {}\n".format(df_each.columns)
+    report_line = report_line+"         "
+    for jdx, colname in enumerate(df_each.columns):
+        report_line = report_line+"{:40}".format(colname)
+        if (jdx % 3 == 2):
+            report_line = report_line+"\n"
+            report_line = report_line+"         "
+        elif (jdx == len(df_each.columns)-1):
+            report_line = report_line+"\n"
+        
+    
     report_string = report_string + report_line + "\n"
 
 

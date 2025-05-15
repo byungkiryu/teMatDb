@@ -43,7 +43,7 @@ DIR_40_tematdb_ZT_error          =  "data_400_tematdb_ZT_error/"
 DIR_50_tematdb_ZT_filter         =  "data_500_filter_table/"
 DIR_99_tematdb_summary_meta      =  "data_900_tematdb_meta/"
 
-filename_metadataexcel       =   "_tematdb_v1.1.6_metadata-20250224.xlsx"
+filename_metadataexcel       =   "_tematdb_v1.1.6_metadata-20250514.xlsx"
 filename_complete_TEP        =  DIR_10_tematdb_converted_to_csv + "tematdb_v1.1.6_completeTEPset.csv"
 filename_extended_TEP        =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedZTset_dT2K.csv"
 filename_ZT_error_dropna     = DIR_40_tematdb_ZT_error +"ZT_error_table_dropna.csv" 

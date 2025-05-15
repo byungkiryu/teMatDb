@@ -100,8 +100,6 @@ for sample_id in sample_id_list:
 
 
 ## Read mat meta excel
-file_db_meta = "_tematdb_v1.1.6_metadata-20250224.xlsx"
-df_db_meta = pd.read_excel("./"+file_db_meta, sheet_name='list', )
 
 
 dbversionshort  = 'tematdb_{:s}_completeTEPset'.format(dbversion)

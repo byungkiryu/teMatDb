@@ -22,7 +22,7 @@
 33,2015.0,10.3938/jkps.66.1726,Figure 7,MA-HP673K,MA-HP673K (green closed triangle),Bulk,Bi2Te3,Bi2Te3,BiTeSe,Bi2Te2.7Se0.3,
 34,2010.0,10.1063/1.3427427,Figure 2(f),40wt% NC,40wt% NC (green closed diamond),Bulk,Bi2Te3,Bi2Te3,BiSbTe,Bi0.4Sb1.6Te3,HP
 35,2013.0,10.1039/c3ra23197f,Figure 7,Inorganic ligand capped Bi2Te3,Inorganic ligand capped Bi2Te3 (open black triangle),Bulk,Bi2Te3,Bi2Te3,BiTe,inorganic ligand capped Bi2Te3,SPS
-36,,https://www.semanticscholar.org/paper/Enhancing-Figure-of-Merit-of-Bi0.5Sb1.5Te3-Through-Hsu-Huang/a428cd2a5d6376394266fafcd74b6afa30b73121,,,,,,,,,
+36,2014.0,https://api.semanticscholar.org/CorpusID:137891673,Figure 6(b),ZT,"BiSbTe after annealing process, ZT, filled blue square",Bulk,Bi2Te3,Bi2Te3,BiSbTe,micro-grain and nano-grain Bi0.5Sb1.5Te3,HP
 37,2014.0,10.1002/aenm.201401391,Figure 4(d),MS10,"MS10, matrix: Bi10.1Sb29.5Te 60.3",Bulk,Bi2Te3,Bi2Te3,BiSbTe,Bi0.5Sb1.5Te3,PAS
 38,2015.0,10.1002/aenm.201500411,Figure 12(a),ZM-HD2,"ZM-HD2, inplane",Bulk,Bi2Te3,Bi2Te3,BiTeSe,Bi2Te2.79Se0.21,HP
 39,2013.0,10.1007/s11664-012-2280-6,Figure 5,Mn,nanometal-decorated Bi0.5Sb1.5Te3 nanocomposites (for metal loading of 0.2 wt.%). Solution-based,Bulk,Bi2Te3,Bi2Te3,BiSbTe,Bi0.5Sb1.5Te3 + 0.2wt% Mn-decorated,SPS
@@ -233,7 +233,7 @@
 376,2017.0,10.1039/c7ee02530k,Figure 3,Sn0.97Bi0.03Te–3% PbTe,Sn0.97Bi0.03Te–3% PbTe,,Telluride,SnTe,SnBiTePb,Sn0.97Bi0.03Te + 3% PbTe,
 377,2017.0,10.1039/c7ee02677c,Figure 14,x = 0.4,Bi0.4Sb1.6Te3,,Bi2Te3,Bi2Te3,BiSbTe,Bi0.4Sb1.6Te3,
 378,2018.0,10.1039/c8ee00112j,Figure 5(a),x = 0.0035,In0.0035Pb0.9965Te0.996I0.004,,PbTe,PbTe,InPbTeI,In0.0035Pb0.9965Te0.996I0.004,
-379,2018.0,10.1039/c8ee00290h,Figure 17,,Zn0.015Bi0.46Sb1.54Te3.015,,Bi2Te3,Bi2Te3,ZnBiSbTe,Zn0.015Bi0.46Sb1.54Te3.015,
+379,2018.0,10.1039/c8ee00290h,Figure 17,MS-BST+ZnTe- This work,Zn0.015Bi0.46Sb1.54Te3.015,,Bi2Te3,Bi2Te3,ZnBiSbTe,Zn0.015Bi0.46Sb1.54Te3.015,
 380,2018.0,10.1039/c8ee01151f,Figure 8(c) ,x=4,PbTe + 4% MnTe,,PbTe,PbTe,PbTeMn,PbTe + 4% MnTe,
 382,2019.0,10.1039/c8ee03162b,Figure 6,Sn0.57Sb0.13Ge0.3Te SPS,Sn0.57Sb0.13Ge0.3Te SPS,,Telluride,SnTe,SnSbGeTe,Sn0.57Sb0.13Ge0.3Te,
 383,2019.0,10.1039/c9ee00317g,Figure 6(a),y=0.05,Bi0.05Ge0.99Te,,GeTe,GeTe,BiGeTe,Bi0.05Ge0.99Te,

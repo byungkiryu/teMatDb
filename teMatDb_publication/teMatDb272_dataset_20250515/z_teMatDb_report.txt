@@ -1,25 +1,55 @@
-_____Generated on: 20250515_013109
-  Publicate teMatDb for thermoelectric property curves: teMatDb272
+_____Generated on: 20250515_134730
+  DB pulbictation for thermoelectric property curves: teMatDb272
+    An untral-high quality self-consistent TEP sets
+      digitize (double check at least, triple check for some cases) 
+      transform - collocate (extend) - filter - finalize
+      publicate
 
   Developer: Dr. Byungki Ryu from KERI, Changwon, 51543, Republic of Korea(south)
+    data Contribution: JH Son, HJ Ihm, SJ Park
+    data Contribution: Sungjin Park, Byungki Ryu
+    data curation    : Sungjin Park, Jaywan Chung, Byungki Ryu
+    code collocation : Jaywan Chung, Byungki Ryu
+    code filter      : Byungki Ryu
+    code publication : Byungki Ryu
+
+  Publication        : https://github.com/byungkiryu/teMatDb    Related webpage  : https://tematdb.streamlit.app/
 
   DB info
-    scZT_filter: crieria_10_10_10_10_20_20
-    dbname: teMatDb
-    dbversion: v1.1.6
-    db_mother: teMatDb_v1.1.6
-    db_publication_id: teMatDb272
-    db_full_id: teMatDb272_v1.1.6
+    db_publication_id             : teMatDb272
+    Update Date from excel to csv : 2025-05-15 13:03:44.865946
+    formattedDate                 : 20250515_134730
+    dbname                        : teMatDb
+    dbversion                     : v1.1.6
+    db_mother                     : teMatDb_v1.1.6
+    db_full_id                    : teMatDb272_v1.1.6
+    rep_dbversionlabel            : tematdb_v1.1.6_completeTEPset_convertedOn_20250515_130240__range_1_to_424
+    rep_tep_units                 : ['[V/K]' '[Ohm-m]' '[W/m/K]' '[1]']
 
   Data stats of dataset for TEP (thermoelectric properties)
-    num_sample_id (samples): 272
-    num_DOI (papers): 262
-    len_complete_teps: 14717
-    len_collocated_teps: 56641
-    dT_unit for temp collocation: 2
+    scZT_filter                   : crieria_10_10_10_10_20_20
+    num_sample_id (samples)       : 272
+    num_DOI (papers)              : 262
+    len_rawTEPs                   : 14717
+    len_rawalpha                  : 3853
+    len_rawrho                    : 3853
+    len_rawkappa                  : 3422
+    len_rawZT                     : 3589
+    len_collocatedTEPs            : 56641
+    dT_unit for temp collocation  : 2
 
   Filename information
-    teMatDb_samples.csv                     : filename for sample_id metadata
-    teMatDb_TEPcurves.csv                   : filename for rawdata  teps
-    teMatDb_TEPcollocated.csv               : filename for collated teps
-    20250515_013109                         : formattedDate
+    teMatDb_samples.csv           : file for sample_id metadata
+         sample_id                               YEAR                                    DOI                                     
+         figure_number_of_targetZT               label_of_targetZT_in_figure             figure_label_description                
+         mat_dimension(bulk, film, 1D, 2D)       GROUP                                   BASEMAT                                 
+         Composition_by_element                  Composition_detailed                    SINTERING                               
+         
+    teMatDb_rawTEPs.csv           : file for raw teps from figures
+         sample_id                               tepname                                 Temperature                             
+         tepvalue                                
+
+    teMatDb_collocatedTEPs.csv    : file for collocated teps (formatted T, interpolated, no-extrapolated)
+         sample_id                               Temperature                             alpha                                   
+         rho                                     kappa                                   ZT_author_declared                      
+         

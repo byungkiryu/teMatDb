@@ -208,7 +208,7 @@ def get_DOI(sample_id):
 
 ## Read mat meta excel
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
-file_db_meta = "_tematdb_v1.1.6_metadata-20250224.xlsx"
+file_db_meta = "_tematdb_v1.1.6_metadata-20250514.xlsx"
 df_db_meta = pd.read_excel("./"+file_db_meta, sheet_name='list', )
 
 ## db info
