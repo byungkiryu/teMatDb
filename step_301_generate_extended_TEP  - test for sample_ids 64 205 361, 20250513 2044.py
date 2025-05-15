@@ -70,7 +70,7 @@ def tep_generator_from_excel_files(sample_id, interp_opt):
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
 
 ## Read mat meta excel
-file_db_meta = "_tematdb_metadata_v1.1.6-20250224.xlsx"
+file_db_meta = "_tematdb_v1.1.6_metadata-20250514.xlsx"
 df_db_meta = pd.read_excel("./"+file_db_meta, sheet_name='list', )
 
 ## db info
