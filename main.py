@@ -463,7 +463,7 @@ with tab_1_tep:
             ThTEPZT = min(autoTh, ThZT)            
             st.markdown(":blue[TEP interpolation interval (Tc, Th) = ({:6.2f} K, {:6.2f} K)]  \n".format(autoTc,autoTh) \
                         + ":red[ZT interpolation interval (Tc, Th) = ({:6.2f} K, {:6.2f} K)]  \n".format(TcZT,ThZT) \
-                        + ":green[Union of TEP and ZT interpolation interval (Tc, Th) = ({:6.2f} K, {:6.2f} K)]".format(TcZT,ThZT))
+                        + ":green[Union of TEP and ZT interpolation interval (Tc, Th) = ({:6.2f} K, {:6.2f} K)]".format(TcTEPZT,ThTEPZT))
 
         
     ## Digitized data quality using error analysis
