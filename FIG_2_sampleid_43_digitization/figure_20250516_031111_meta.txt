@@ -1,5 +1,0 @@
-labels0: ['sample_id =43', 'TEP-interpolated']
-colors0: ['C0', 'C0']
-alphas0: [1, 0.2]
-zorder0: [200, 100]
-linewidth: 8

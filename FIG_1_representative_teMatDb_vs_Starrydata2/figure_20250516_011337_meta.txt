@@ -1,4 +1,0 @@
-labels0: ['teMatDb', 'Starrydata2']
-colors0: ['C1', 'C0']
-alphas0: [0.4, 0.2]
-zorder0: [200, 100]
