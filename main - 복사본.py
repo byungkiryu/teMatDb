@@ -75,9 +75,9 @@ tab_1_tep, tab_2_scZT, tab_teMatDb, tab_theory, tab_link, tab_about = st.tabs(["
 
 
 import tabs.tab_contents_teMatDb as tab_contents_teMatDb
-import tabs.tab_contents_theory  as tab_contents_theory
-import tabs.tab_contents_link    as tab_contents_link
-import tabs.tab_contents_about   as tab_contents_about
+import tabs.tab_contents_theory as tab_contents_theory
+import tabs.tab_contents_link as tab_contents_link
+import tabs.tab_contents_about as tab_contents_about
 
 
 # with tab_dataDist:  

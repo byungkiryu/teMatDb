@@ -42,7 +42,7 @@ def show_dataDistribution():
     ##################
     ##################
     ##################
-    img_path = os.path.join(HERE, "..",
+    img_path = os.path.join(HERE, "..", "FIGURES",
                             "FIG_1_representative_teMatDb_vs_Starrydata2",
                             "figure.png")
     st.image( img_path )
@@ -57,51 +57,56 @@ def show_dataDistribution():
     ##################
     ##################
     ##################
-    img_path = os.path.join(HERE, "..", 
+    img_path = os.path.join(HERE, "../", "FIGURES",
                             "FIG_2_total_TEP_TO_ERROR_sampleid43", 
                             "figure.png")
     st.image( img_path )
     st.subheader(":green[Fig. 2 TEP digitization and ZT error] ")    
-    st.markdown(r""":red[TEP and ZT error analysis for sample_id=43.]    
-                (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.
-                (e) $\delta (\rm ZT)$ with temperature and (f) theoretical quantiles. .
+    st.markdown(r"""
+                :red[ZT error case: Data bia error itself in sample_id=43]         
+                (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.            
+                (e) $\delta$(ZT) with temperature and (f) theoretical quantiles.
                 """) 
                 
     with st.expander("See error cases", expanded=False):    
-        img_path = os.path.join(HERE, "..", 
-                                "FIG_2_total_TEP_TO_ERROR_sampleid95", 
+        
+        img_path = os.path.join(HERE, "..", "FIGURES",
+                                "FIG_2s_total_TEP_TO_ERROR_sampleid95", 
                                 "figure.png")
         st.image( img_path )   
-        st.markdown(r""":red[ZT error case: Data bia error itself in sample_id=95]    
-                    (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.
-                    (e) $\delta (\rm ZT)$ with temperature and (f) theoretical quantiles. .
+        st.markdown(r"""
+                    :red[ZT error case: Data bia error itself in sample_id=95]         
+                    (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.            
+                    (e) $\delta$(ZT) with temperature and (f) theoretical quantiles.
                     """) 
         
-        img_path = os.path.join(HERE, "..", 
-                                "FIG_2_total_TEP_TO_ERROR_sampleid113", 
+        img_path = os.path.join(HERE, "..", "FIGURES",
+                                "FIG_2s_total_TEP_TO_ERROR_sampleid113", 
                                 "figure.png")
         st.image( img_path )  
-        st.markdown(r""":red[ZT error case: fitting-induced error in sample_id=113]    
-                    (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.
-                    (e) $\delta (\rm ZT)$ with temperature and (f) theoretical quantiles. .
+        st.markdown(r"""
+                    :red[ZT error case: fitting-induced error in sample_id=113]    
+                    (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.            
+                    (e) $\delta$(ZT) with temperature and (f) theoretical quantiles.
                     """) 
         
-        img_path = os.path.join(HERE, "..", 
-                                "FIG_2_total_TEP_TO_ERROR_sampleid300", 
+        img_path = os.path.join(HERE, "..", "FIGURES",
+                                "FIG_2s_total_TEP_TO_ERROR_sampleid300", 
                                 "figure.png")
         st.image( img_path ) 
-        st.markdown(r""":red[ZT error case: phase transformation and interpolation-induced error in sample_id=300]    
-                    (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.
-                    (e) $\delta (\rm ZT)$ with temperature and (f) theoretical quantiles. .
+        st.markdown(r"""
+                    :red[ZT error case: phase transformation and interpolation-induced error in sample_id=300]    
+                    (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.     
+                    (e) $\delta$(ZT) with temperature and (f) theoretical quantiles.
                     """) 
                 
-        img_path = os.path.join(HERE, "..", 
-                                "FIG_2_total_TEP_TO_ERROR_sampleid415", 
+        img_path = os.path.join(HERE, "..", "FIGURES",
+                                "FIG_2s_total_TEP_TO_ERROR_sampleid415", 
                                 "figure.png")
         st.image( img_path ) 
         st.markdown(r""":red[ZT error case: data-bias error itself in sample_id=415]    
-                    (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.
-                    (e) $\delta (\rm ZT)$ with temperature and (f) theoretical quantiles. .
+                    (a-d) Seebeck coeffciient, electrical resistivity, thermal conductivity, and ZT.     
+                    (e) $\delta$(ZT) with temperature and (f) theoretical quantiles.
                     """) 
     
     # st.markdown("(a) Digitization and continuation for sample_id = 43.") 
@@ -110,43 +115,78 @@ def show_dataDistribution():
     ##################
     ##################
     ##################
-    img_path = os.path.join(HERE, "..", 
-                            "FIG_3_ZTerror_over_teMatDb", 
+    img_path = os.path.join(HERE, "..", "FIGURES",
+                            "FIG_3", 
+                            # "FIG_3_ZTerror_over_teMatDb", 
                             "figure.png")
     st.image( img_path )  
     st.subheader(":green[Fig. 3 ZT self-consistency between figures and TEPs] ")  
-    st.markdown("(a) Average ZT's ZT(figure)-ZT(TEP) plot before and after Sc-ZT filtering")    
-    st.markdown("(b) Peak ZT's ZT(figure)-ZT(TEP) plot before and after Sc-ZT filtering")    
-    st.markdown("Q-Q plot (c) before and (d) after Sc-ZT filtering")    
+    st.markdown("""
+                (a) Average ZT's ZT(figure)-ZT(TEP) plot before and after Sc-ZT filtering,     
+                (b) Peak ZT's ZT(figure)-ZT(TEP) plot before and after Sc-ZT filtering Q-Q plot,     
+                (c) before and (d) after Sc-ZT filtering
+                """)
     
     
     ##################
     ##################
     ##################    
-    img_path = os.path.join(HERE, "..", 
+    img_path = os.path.join(HERE, "..",  "FIGURES",
                             "FIG_4_ScZT_filter_validation_w_starryz", 
                             "figure.png")
     st.image( img_path )
-    st.subheader(":green[Fig. 4 Starrydata2 (250501) and starryz15532]")  
-    
+    st.subheader(":green[Fig. 4 Sc-ZT filter and Starrydata2]")  
+    st.markdown("""
+                (a) ZT distribution: Peak ZT (TEP) over Peak ZT (figure), 
+                before/after applying Sc-ZT filter for Starrydata2 (250501) resulting in starryz15532.
+                (b) Zoom-in for reliable ZT ranges
+                """)
     
     ##################
     ##################
     ##################    
-    img_path = os.path.join(HERE, "..", 
-                            "FIG_5_Lorenz_Stats_from_collocatedTEPs", 
+    img_path = os.path.join(HERE, "..", "FIGURES",
+                            "FIG_5_TEP_TEP_plots_allTemp", 
                             "figure.png")
     st.image( img_path )
-    st.subheader(":green[Fig. 4 Thermoelectric Lorenz number]")  
+    st.subheader(":green[Fig. 5 TEP-TEP relations]")  
+    st.markdown(r"""
+                (a) $\alpha$ vs $\sigma$ with PF color and (b) with ZT color,    
+                (c) $\kappa$ vs $\sigma$, 
+                (d) $\kappa$ vs $\alpha$,    
+                (e) ZT vs PF, 
+                (f) ZT vs $\kappa$.
+                """)
 
     
     # st.subheader(":green[Fig. 5 TEP distribution for teMatDb272]")  
     # st.markdown(r"$\alpha$, $\rho$, $\sigma$, Power factor, $\kappa$, $\rho\kappa$")    
-    st.subheader(":green[Fig. 6 TEP analysis]")  
-    st.markdown(r"Relation between $\alpha$, thermoelectric Lorenz number ($L_{\rm TE}$), and ZT, where $L_{\rm TE}:=\frac{\rho \kappa}{T}$.")    
-    st.markdown(r"L(T) curve, L-$\alpha$ with ZT color")    
-    st.subheader(":green[Fig. 7 Application. Device performance prediction]") 
-    st.markdown(r"Thermoelectric efficiency and power plot with $\Delta$T")    
+    # st.subheader(":green[Fig. 6 TEP analysis]")  
+    # st.markdown(r"""
+    #             :red[Scheduled for Later Release].     
+    #             Relation between TEPs and thermoelectric Lorenz number ($L_{\rm TE}$), and ZT, 
+    #             where $L_{\rm TE}:=\frac{\rho \kappa}{T}$.
+    #             """)
+    with st.expander(":red[Scheduled for Later Release]", expanded=False):    
+        
+        img_path = os.path.join(HERE, "..", "FIGURES",
+                                "FIG_5b_Lorenz_Stats_from_collocatedTEPs", 
+                                "figure.png")
+        st.image( img_path )   
+        st.subheader(":green[Fig. 6 Lorenz number and TEP relations]")  
+        st.markdown(r"""
+                    :red[Thermoelectric Lorenz number (L$_{\rm TE}$) distribution]         
+                    (a) Temperature dependent L$_{\rm TE}$(T),    
+                    (b-d) TEPs versus L$_{\rm TE}$.
+                    """) 
+                    
+                    
+                    
+        st.subheader(":green[Fig. 7 Application. Device performance prediction]") 
+        st.markdown(r"""
+                    :red[Scheduled for Later Release].         
+                    Thermoelectric efficiency and power plot with $\Delta$T.
+                    """)
      
     return True
 
