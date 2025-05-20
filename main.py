@@ -61,7 +61,7 @@ st.set_page_config(page_title="teMatDb v1.1.6")
 st.title("teMatDb")
 st.subheader(":blue[t]hermo:blue[e]lectric :blue[Mat]erial :blue[D]ata:blue[b]ase")
 st.markdown("""
-            - High quality thermoelectric database, teMatDb (ver1.1.6)
+            - A curated high-quality thermoelectric material database, teMatDb (ver1.1.6)
             - That can be used for data analytics, machine learning and AI
             """)
 
@@ -80,9 +80,6 @@ import tabs.tab_contents_link    as tab_contents_link
 import tabs.tab_contents_about   as tab_contents_about
 
 
-# with tab_dataDist:  
-    # Regarding Data info
-    # tab_contents_datadistribution.show_dataDistribution()
     
 with tab_theory:
     # Regarding theory
@@ -93,7 +90,6 @@ with tab_theory:
 with tab_link:
 #     # Regarding link
     tab_contents_link.show_main_link_hub()
-#     tab_contents_link.show_network()
     tab_contents_link.show_link()
     tab_contents_link.show_QR_code()
     
@@ -106,11 +102,7 @@ with tab_about:
 with tab_teMatDb:
     tab_contents_teMatDb.show_report_teMatDb272()
     tab_contents_teMatDb.show_dataDistribution()
-    # report_path_teMatDb = "teMatDb_publication/teMatDb272_dataset_20250515/z_teMatDb_report.txt"
-    # # 파일 읽기
-    # with open(report_path_teMatDb272, "r", encoding="utf-8") as file:
-    #     report_text = file.read()
-    # st.text(report_text)
+
 
 
 
@@ -129,7 +121,6 @@ DIR_10_tematdb_converted_to_csv  =  "data_100_tematdb_csv_converted/"
 DIR_30_tematdb_extTEP_csv        =  "data_300_tematdb_extTEP_csv/"
 DIR_40_tematdb_ZT_error          =  "data_400_tematdb_ZT_error/"
 
-# file_tematdb_metadata_excel   =   "_tematdb_v1.1.6_metadata-20250224.xlsx"
 file_tematdb_metadata_excel   =   "_tematdb_v1.1.6_metadata-20250514.xlsx"
 file_tematdb_db_csv         =  DIR_10_tematdb_converted_to_csv + "tematdb_v1.1.6_completeTEPset.csv"
 file_tematdb_db_extZT_csv   =  DIR_30_tematdb_extTEP_csv       + "tematdb_v1.1.6_extendedZTset_dT2K.csv"
@@ -206,7 +197,7 @@ with st.sidebar:
         st.subheader(":red[Select sample_id]")
         option_sample_id = list(df_db_meta['sample_id'].unique())
         sample_id = st.selectbox('Select or type sample_id:',
-            option_sample_id, index=0,
+            option_sample_id, index=42,  ## default sample_id == 43, BST-Ag from KERI
             label_visibility="collapsed")   
         
         df_db_meta_sample_id = df_db_meta[ df_db_meta['sample_id'] == sample_id]
