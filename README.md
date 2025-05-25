@@ -1,5 +1,5 @@
 ### 👋 I am Byungki Ryu  
-From the **ThermoElectric Science (TES)** group at **KERI**, Changwon, Korea.
+From the **ThermoElectric Physics and Science (TES)** Team at **KERI**, Changwon, Korea.
 
 Although many papers have reported thermoelectric properties,  the material space remains highly fragmented, making it difficult to develop a unified understanding of **thermoelectric transport**. 
 
@@ -8,8 +8,9 @@ As a **theoretical physicist**, I have been deeply motivated by this challenge.
 Over the past decade, I have worked to develop an  **ultra-high-quality database for thermoelectric materials**. 
 
 This effort led to the creation of:
-- 🔎 **Self-consistent ZT filter**  
-- 🧪 **teMatDb**
+- 🧪 **teMatDb v1.1.6**, a whole DB system
+- 🔎 **Self-consistent ZT filtering protocol**, developed filters for data self-consistency  
+- 🧪 **teMatDb272**, an ultra-high quality TE dataset
 
 These tools have also been applied to the world's largest thermoelectric database, **Starrydata2**.
 
@@ -32,11 +33,76 @@ These tools have also been applied to the world's largest thermoelectric databas
 4) Sc-ZT and classical filtering tables: :      500_filter_table_classical_and_scZT/crieria_02_02_02_02_04_04_results_filtered_scZT.csv
 9) metadata:      999_Starrydata2_rawdata_meta/starrydata_dataset_250501-0300_meta_samples-scZT_clas_filteres-20250515_232713.xlsx 
 
+
 ---
 
-### 🔜 What’s Next?
+### 📦 teMatDb272: Published Dataset (2025) — to be submitted in a journal*
 
-I am now developing a data structure for thermoelectric materials experimental data,  
-under the name: **`teMatDb_expt`**
+This is the curated dataset used in the manuscript:
 
+📄 *teMatDb: A High-Quality Thermoelectric Material Database with Self-Consistent ZT Filtering*  
+📅 Submitted: May 2025 
+🔗 DOI: *(to be updated after acceptance)*  
+🌐 Streamlit Viewer: https://tematdb.streamlit.app/  
+🧩 Source code: [GitHub repository](https://github.com/byungkiryu/teMatDb)
 
+#### Files included in `./tematdb272_publication/`:
+
+| File                          | Description |
+|-------------------------------|-------------|
+| `teMatDb_samples.csv`         | Sample metadata: `sample_id`, year, DOI, composition, group, dimension, etc. |
+| `teMatDb_rawTEPs.csv`         | Digitized raw TEP values (`α`, `ρ`, `κ`, `ZT`) with temperature |
+| `teMatDb_collocatedTEPs.csv`  | Interpolated TEPs at 2 K intervals for Sc-ZT error evaluation |
+| `z_teMatDb_report.txt`        | DB summary and filtering criteria |
+
+---
+
+### 🧠 What is Sc-ZT Filtering?
+
+The **self-consistent ZT (Sc-ZT) filtering protocol** compares:
+- Reported `ZT_fig` from figures  
+- Recalculated `ZT_TEP` from digitized α(T), ρ(T), κ(T)
+
+This enables detection of:
+- Digitization noise  
+- Fitting-induced bias  
+- Publication/extrapolation errors
+
+ZT error is computed as:  
+`δ(ZT) = ZT_fig − ZT_TEP`
+
+---
+
+### 📊 Included Datasets
+
+| Dataset         | Samples | Description |
+|-----------------|---------|-------------|
+| `teMatDb272`     | 272     | Final filtered data (default: `0.1, 0.1, 0.1, 0.1, 0.2, 0.2`) |
+| `starryz10840`   | 10,840  | Sc-ZT filtered *Starrydata2* |
+| `starryz15053`   | 15,053  | Classical filtered version |
+| `starryz15532`   | 15,532  | Unfiltered raw subset |
+
+📎 Download all `starryz` datasets from Figshare:  
+**[https://figshare.com/s/50a78a58d6a84a5b6302](https://figshare.com/s/50a78a58d6a84a5b6302)**
+
+📎 See `Supporting Table S3` for full statistics.
+
+---
+
+### 🧭 What’s Next?
+
+We are currently developing **`teMatDb_expt`**,  
+a structured repository for experimental thermoelectric data,  
+designed to support multi-lab, multi-device integration and benchmarking.
+
+---
+
+### 💡 Citation
+
+When citing this dataset, please refer to:
+
+> **Byungki Ryu et al.**,  
+> *teMatDb: A High-Quality Thermoelectric Material Database with Self-Consistent ZT Filtering*,  
+> Scientific Data (2025), DOI: *(to be added)*
+
+---
