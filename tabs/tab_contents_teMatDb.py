@@ -71,7 +71,7 @@ def show_dataDistribution():
     with st.expander("See error cases", expanded=False):    
         
         img_path = os.path.join(HERE, "..", "FIGURES",
-                                "FIG_2s_total_TEP_TO_ERROR_sampleid95", 
+                                "FIG_S3_total_TEP_TO_ERROR_sampleid95", 
                                 "figure.png")
         st.image( img_path )   
         st.markdown(r"""
@@ -81,7 +81,7 @@ def show_dataDistribution():
                     """) 
         
         img_path = os.path.join(HERE, "..", "FIGURES",
-                                "FIG_2s_total_TEP_TO_ERROR_sampleid113", 
+                                "FIG_S5_total_TEP_TO_ERROR_sampleid113", 
                                 "figure.png")
         st.image( img_path )  
         st.markdown(r"""
@@ -91,7 +91,7 @@ def show_dataDistribution():
                     """) 
         
         img_path = os.path.join(HERE, "..", "FIGURES",
-                                "FIG_2s_total_TEP_TO_ERROR_sampleid300", 
+                                "FIG_S6_total_TEP_TO_ERROR_sampleid300", 
                                 "figure.png")
         st.image( img_path ) 
         st.markdown(r"""
@@ -101,7 +101,7 @@ def show_dataDistribution():
                     """) 
                 
         img_path = os.path.join(HERE, "..", "FIGURES",
-                                "FIG_2s_total_TEP_TO_ERROR_sampleid415", 
+                                "FIG_S4_total_TEP_TO_ERROR_sampleid415", 
                                 "figure.png")
         st.image( img_path ) 
         st.markdown(r""":red[ZT error case: data-bias error itself in sample_id=415]    
@@ -116,7 +116,7 @@ def show_dataDistribution():
     ##################
     ##################
     img_path = os.path.join(HERE, "..", "FIGURES",
-                            "FIG_3", 
+                            "FIG_3_ZT_ZT_plot_before_after_ScZT_Filter", 
                             # "FIG_3_ZTerror_over_teMatDb", 
                             "figure.png")
     st.image( img_path )  
@@ -131,25 +131,11 @@ def show_dataDistribution():
     ##################
     ##################
     ##################    
-    img_path = os.path.join(HERE, "..",  "FIGURES",
-                            "FIG_4_ScZT_filter_validation_w_starryz", 
-                            "figure.png")
-    st.image( img_path )
-    st.subheader(":green[Fig. 4 Sc-ZT filter and Starrydata2]")  
-    st.markdown("""
-                (a) ZT distribution: Peak ZT (TEP) over Peak ZT (figure), 
-                before/after applying Sc-ZT filter for Starrydata2 (250501) resulting in starryz15532.
-                (b) Zoom-in for reliable ZT ranges
-                """)
-    
-    ##################
-    ##################
-    ##################    
     img_path = os.path.join(HERE, "..", "FIGURES",
-                            "FIG_5_TEP_TEP_plots_allTemp", 
+                            "FIG_4_TEP_TEP_plots_allTemp", 
                             "figure.png")
     st.image( img_path )
-    st.subheader(":green[Fig. 5 TEP-TEP relations]")  
+    st.subheader(":green[Fig. 4 TEP-TEP relations]")  
     st.markdown(r"""
                 (a) $\alpha$ vs $\sigma$ with PF color and (b) with ZT color,    
                 (c) $\kappa$ vs $\sigma$, 
@@ -158,19 +144,30 @@ def show_dataDistribution():
                 (f) ZT vs $\kappa$.
                 """)
 
+
+
+    ##################
+    ##################
+    ##################    
+    img_path = os.path.join(HERE, "..",  "FIGURES",
+                            "FIG_5_starryz_Starrydata2_After_Filter", 
+                            "figure.png")
+    st.image( img_path )
+    st.subheader(":green[Fig. 5 Sc-ZT filter and Starrydata2 (starryz)]")  
+    st.markdown("""
+                (a) ZT distribution: Peak ZT (TEP) over Peak ZT (figure), 
+                before/after applying Sc-ZT filter for Starrydata2 (250501) resulting in starryz15532.
+                (b) Zoom-in for reliable ZT ranges
+                """)
     
-    # st.subheader(":green[Fig. 5 TEP distribution for teMatDb272]")  
-    # st.markdown(r"$\alpha$, $\rho$, $\sigma$, Power factor, $\kappa$, $\rho\kappa$")    
-    # st.subheader(":green[Fig. 6 TEP analysis]")  
-    # st.markdown(r"""
-    #             :red[Scheduled for Later Release].     
-    #             Relation between TEPs and thermoelectric Lorenz number ($L_{\rm TE}$), and ZT, 
-    #             where $L_{\rm TE}:=\frac{\rho \kappa}{T}$.
-    #             """)
+
+
+    
+
     with st.expander(":red[Scheduled for Later Release]", expanded=False):    
         
         img_path = os.path.join(HERE, "..", "FIGURES",
-                                "FIG_5b_Lorenz_Stats_from_collocatedTEPs", 
+                                "FIG_6_Lorenz_Stats_from_collocatedTEPs", 
                                 "figure.png")
         st.image( img_path )   
         st.subheader(":green[Fig. 6 Lorenz number and TEP relations]")  

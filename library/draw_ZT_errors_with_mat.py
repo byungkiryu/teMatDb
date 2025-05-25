@@ -36,8 +36,10 @@ from matplotlib import pyplot as plt
 
 formattedDate, yyyymmdd, HHMMSS = br.now_string()
 
-def draw3QQ(df1,df2, label_db="", label_sample_id="", label_DOI=""):
-    suptitle = "{}".format(label_db)     
+def draw3QQ(df1,df2, label_db_qq="", label_sample_id="", label_DOI=""):
+    # num_samples = df1.sample_id.nunique()
+    
+    suptitle = "{}".format(label_db_qq)     
     figsize = (13,4) 
     # fig, axs = plt.subplots(1,3,figsize=figsize, sharex=True, constrained_layout=True )  
     fig, axs = plt.subplots(1,3,figsize=figsize, sharex=True,  )  
@@ -45,10 +47,13 @@ def draw3QQ(df1,df2, label_db="", label_sample_id="", label_DOI=""):
     (ax1, ax2, ax3) = axs 
     fig.suptitle(suptitle)
     
+    
+    
     ax = ax1
-    tep_title = r'Q-Q plot of $\delta$($ZT)$'
+    tep_title = r'(a) Q-Q plot of $\delta$($ZT)$'
     X = df1.ZT_author_declared - df1.ZT_tep_reevaluated
     stats.probplot(X,dist=stats.norm, plot=ax, rvalue=True)     
+    ax.set_title(tep_title)
     ax.set_ylabel(r"$\delta$($ZT$)")
     # Xlim = max( np.abs(X) ) 
     # print(Xlim)
@@ -56,27 +61,29 @@ def draw3QQ(df1,df2, label_db="", label_sample_id="", label_DOI=""):
     # # Xrange = np.arange(-Xlim2, Xlim2+0.05,0.1)
     # Xlim3 = Xlim2 *1.1
     # ax.set_ylim(-Xlim3,Xlim3)
-    ax.set_xlim(-4.5,4.5)
+    ax.set_xlim(-5,5)
     # ax.legend(loc=2)
-    ax.set_title(tep_title)
+    
 
     ax = ax2
-    tep_title = r'Q-Q plot of $\delta$(avg-$ZT$)'
+    tep_title = r'(b) Q-Q plot of $\delta$(avg-$ZT$)'
     X = df2.dropna(axis=0,subset='d_avgZT').d_avgZT
     stats.probplot(X,dist=stats.norm, plot=ax, rvalue=True)    
+    ax.set_title(tep_title)
     ax.set_ylabel(r"$\delta$(avg-$ZT$)")    
     # Xlim = max( np.abs(X) ) 
     # Xlim2 = (math.ceil(Xlim/0.1)+0.0) *0.1
     # # Xrange = np.arange(-Xlim2, Xlim2+0.05,0.1)
     # Xlim3 = Xlim2 *1.1
     # ax.set_ylim(-Xlim3,Xlim3)
-    ax.set_xlim(-4.5,4.5)
-    ax.set_title(tep_title)
+    ax.set_xlim(-5,5)
+    
 
     ax = ax3
-    tep_title = r'Q-Q plot of $\delta$(peak-$ZT$)'
+    tep_title = r'(c) Q-Q plot of $\delta$(peak-$ZT$)'
     X = df2.dropna(axis=0,subset='d_peakZT').d_peakZT
     stats.probplot(X,dist=stats.norm, plot=ax, rvalue=True)    
+    ax.set_title(tep_title)
     ax.set_ylabel(r"$\delta$(peak-$ZT$)")    
     # Xlim = max( np.abs(X) ) 
     # Xlim2 = (math.ceil(Xlim/0.1)+0.0) *0.1
@@ -84,7 +91,7 @@ def draw3QQ(df1,df2, label_db="", label_sample_id="", label_DOI=""):
     # Xlim3 = Xlim2 *1.1
     # ax.set_ylim(-Xlim3,Xlim3)
     ax.set_xlim(-4.5,4.5)
-    ax.set_title(tep_title)
+    
     
     for ax in (ax1, ax2, ax3):
         ax.xaxis.set_ticks_position('both')

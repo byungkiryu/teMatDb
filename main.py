@@ -81,20 +81,16 @@ import tabs.tab_contents_about   as tab_contents_about
 
 
     
-with tab_theory:
-    # Regarding theory
-    # tab_contents_theory.show_data_description()
+with tab_theory:    # Regarding theory
     tab_contents_theory.show_theory()
     tab_contents_theory.show_reference()
 
-with tab_link:
-#     # Regarding link
+with tab_link:     # Regarding link
     tab_contents_link.show_main_link_hub()
     tab_contents_link.show_link()
     tab_contents_link.show_QR_code()
     
-with tab_about:   
-    # Regarding KERI Info
+with tab_about:       # Regarding KERI Info
     tab_contents_about.show_me()
     tab_contents_about.show_map_and_collaboration()
     tab_contents_about.show_about()
@@ -369,8 +365,14 @@ with st.sidebar:
                         cri_vals2, cri_vals3, 
                         cri_vals4, cri_vals5,
                         ]
+            for iiiii in range(5):
+                cri_vals[iiiii] = round( cri_vals[iiiii], 2)            
         else:
             cri_vals = cri_vals_def
+
+        cri_string = "Cri.={:.2f}-{:.2f}-{:.2f}-{:.2f}-{:.2f}-{:.2f}".format( cri_vals0, cri_vals1, 
+                                                cri_vals2, cri_vals3, 
+                                                cri_vals4, cri_vals5)
 
 
 
@@ -613,9 +615,9 @@ with tab_2_scZT:
         draw_ZT_error_correlation(df2)        
 
     st.subheader(":red[QQ analysis]")
-    # X = df1.ZT_author_declared - df1.ZT_tep_reevaluated
-    fig_before_filter = draw3QQ(df1,df2,label_db, label_sample_id, label_DOI)
-    # fig_before_filter = draw4QQ(df1,df2,label_db, label_sampleid, label_DOI)
+    label_db_qq = "{} {} ({}) having {} samples".format(label_db, dbversion,
+                                                          "no filtering", df1.sample_id.nunique() )
+    fig_before_filter = draw3QQ(df1,df2,label_db_qq, label_sample_id, label_DOI)
     st.pyplot(fig_before_filter)
 
  
@@ -633,7 +635,12 @@ with tab_2_scZT:
         st.subheader(":red[ZT Error Correlation]")
         draw_ZT_error_correlation(df4)    
     st.subheader(":red[QQ analysis]")
-    # X = df1.ZT_author_declared - df1.ZT_tep_reevaluated
-    fig_after_filter = draw3QQ(df3,df4,label_db, label_sample_id, label_DOI)
-    # fig_after_filter = draw4QQ(df3,df4,label_db, label_sampleid, label_DOI)
+    # label_db_qq = "{} ({}: {})".format(label_db,"Sc-ZT filtering",cri_vals)
+    
+    
+    label_db_qq2 = "{} {} ({}, {}) having {} samples".format(label_db, dbversion,
+                                                          "Sc-ZT filtered", 
+                                                          cri_string,
+                                                          df3.sample_id.nunique() )
+    fig_after_filter = draw3QQ(df3,df4,label_db_qq2, label_sample_id, label_DOI)
     st.pyplot(fig_after_filter)      
