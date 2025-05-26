@@ -142,11 +142,9 @@ When citing this dataset, please refer to:
 
 ## 📄 License
 
-- Code (excluding `pykeri`): [MIT License](LICENSE)
-- Data (`teMatDb272.csv` and other TEP curves): © 2025 Byungki Ryu, distributed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- `pykeri` module: Licensed separately; see [pykeri repository](## 📄 License
-
-- Code (excluding `pykeri`): [MIT License](LICENSE)
-- Data (`teMatDb272.csv` and other TEP curves): © 2025 Byungki Ryu, distributed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- `pykeri` module: Licensed separately; see [pykeri repository](https://github.com/byungkiryu/teMatDb/tree/main/pykeri) for terms
+- Code in this repository (excluding the [`pykeri`](https://github.com/byungkiryu/teMatDb/tree/main/pykeri) subdirectory):  
+  Licensed under the [MIT License](LICENSE)
+- Data files (e.g., `teMatDb272.csv` and other TEP curve sets):  
+  © 2025 Byungki Ryu, distributed under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+- The [`pykeri`](https://github.com/byungkiryu/teMatDb/tree/main/pykeri) module is developed and maintained separately, and is subject to its own license.
 
