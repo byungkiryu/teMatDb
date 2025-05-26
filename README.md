@@ -1,5 +1,7 @@
 ## 👋 I am Byungki Ryu  
 From the **ThermoElectric Physics and Science (TES)** Team at **KERI**, Changwon, Korea.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15518036.svg)](https://doi.org/10.5281/zenodo.15518036)
+
 
 Although many papers have reported thermoelectric properties, the material space remains highly fragmented,  
 making it difficult to develop a unified understanding of **thermoelectric transport**.
@@ -134,9 +136,9 @@ designed to support multi-lab, multi-device integration and benchmarking.
 
 When citing this dataset, please refer to:
 
-> **Byungki Ryu et al.**,  
-> *teMatDb: A High-Quality Thermoelectric Material Database with Self-Consistent ZT Filtering*,  
-> Journal name *(to be added)* (2025), DOI: *(to be added)*
+> **Byungki Ryu**,  
+> *teMatDb v1.1.6: Thermoelectric Material Database*,  
+> Zenodo (2025). [https://doi.org/10.5281/zenodo.15518036](https://doi.org/10.5281/zenodo.15518036)
 
 ---
 
