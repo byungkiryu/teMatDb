@@ -139,3 +139,14 @@ When citing this dataset, please refer to:
 > Journal name *(to be added)* (2025), DOI: *(to be added)*
 
 ---
+
+## 📄 License
+
+- Code (excluding `pykeri`): [MIT License](LICENSE)
+- Data (`teMatDb272.csv` and other TEP curves): © 2025 Byungki Ryu, distributed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- `pykeri` module: Licensed separately; see [pykeri repository](## 📄 License
+
+- Code (excluding `pykeri`): [MIT License](LICENSE)
+- Data (`teMatDb272.csv` and other TEP curves): © 2025 Byungki Ryu, distributed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- `pykeri` module: Licensed separately; see [pykeri repository](https://github.com/byungkiryu/teMatDb/tree/main/pykeri) for terms
+
