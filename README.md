@@ -22,6 +22,16 @@ These tools have also been applied to the world's largest thermoelectric databas
 
 ---
 
+## 📦 teMatDb272: Published Dataset (2025) — *Published on arXiv*, to be submitted to *Scientific Data*
+
+This is the curated dataset used in the following manuscript:
+
+📄 *teMatDb: A High-Quality Thermoelectric Material Database with Self-Consistent ZT Filtering*  
+📅 Submitted: 25 May 2025  
+📚 [arXiv:2505.19150](https://doi.org/10.48550/arXiv.2505.19150)
+
+---
+
 ## 📁 Key data directories (internal file map)
 
 ### 🔸 teMatDb v1.1.6
@@ -30,21 +40,24 @@ These tools have also been applied to the world's largest thermoelectric databas
   `./_tematdb_v1.1.6_metadata-20250514.xlsx`
 
 - Raw Excel (digitized):  
-  `./data_00_tematdb_raw_excel/tematdb_tep_excel_v1.1.6_{:05d}-{:05d}.xlsx`
+  `./data_000_tematdb_raw_excel/tematdb_tep_excel_v1.1.6_{:05d}-{:05d}.xlsx`
 
-- CSV converted:  
-  `./data_10_tematdb_csv_converted/tematdb_v1.1.6_completeTEPset.csv`
+- Raw CSV converted in a single file:  
+  `./data_100_tematdb_csv_converted/tematdb_v1.1.6_completeTEPset.csv`
 
-- Extended TEP (2 K spacing):  
-  `./data_30_tematdb_extTEP_csv/tematdb_v1.1.6_extendedTEPset_dT2K.csv`
+- Extended TEP (2 K spacing), it is also called as collocatedTEP:  
+  `./data_300_tematdb_extTEP_csv/tematdb_v1.1.6_extendedTEPset_dT2K.csv`
 
 - ZT error curves:  
-  `./data_40_tematdb_ZT_error/ZT_error.csv`
+  `./data_400_tematdb_ZT_error/ZT_error.csv`
 
 - Human digitization error test:  
-  `./data_90_human_digital_error_measure/digitized.xlsx`
+  `./data_080_human_digital_error_measure/digitized.xlsx`
 
+- Published teMatDb272:  
+  `./teMatDb_publication/teMatDb272_dataset_20250515/*`
 ---
+
 
 ### 🔸 Starrydata2 subset (processed version: 20250501)
 
@@ -54,7 +67,7 @@ Located in:
 - Raw TEPs (feather):  
   `100_teps/20250501_rawdata_{TEPS}.feather`
 
-- Extended TEPs (4 K grid):  
+- Extended TEPs (4 K grid) (owing to size limit, only ZT shown):  
   `300_extended_teps/extendedZTset_4K.feather`
 
 - ZT error:  
@@ -118,7 +131,7 @@ This enables detection of:
 
 
 📎 **Download all starryz datasets from Figshare**:  
-https://figshare.com/s/50a78a58d6a84a5b6302
+https://figshare.com/s/50a78a58d6a84a5b6302 (to be updated later as a persistent doi and link)
 
 📎 See Table 3 and Supporting Table S3 in the manuscript for full statistics.
 
@@ -134,11 +147,14 @@ designed to support multi-lab, multi-device integration and benchmarking.
 
 ### 💡 How to Cite
 
-When citing this dataset, please refer to:
+When citing this dataset or the related paper, please refer to:
 
-> **Byungki Ryu**,  
-> *teMatDb v1.1.6: Thermoelectric Material Database*,  
-> Zenodo (2025). [https://doi.org/10.5281/zenodo.15518036](https://doi.org/10.5281/zenodo.15518036)
+> **Byungki Ryu, Ji Hui Son, Sungjin Park, Jaywan Chung, Hye-Jin Lim, SuJi Park, Yujeong Do, SuDong Park**,  
+> *teMatDb: A High-Quality Thermoelectric Material Database with Self-Consistent ZT Filtering*,  
+> arXiv:2505.19150 [cond-mat.mtrl-sci] (2025).  
+> [https://doi.org/10.48550/arXiv.2505.19150](https://doi.org/10.48550/arXiv.2505.19150)  
+>  
+> DOI for dataset: [https://doi.org/10.5281/zenodo.15518036](https://doi.org/10.5281/zenodo.15518036)
 
 ---
 
