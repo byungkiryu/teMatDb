@@ -176,7 +176,8 @@ class MetricPrefix:
                          ['yocto', 'y',  1e-24]],
         columns = [_NAME, _SYMBOL, _CONVERSION_FACTOR])
     # _all.set_index(_all[_SYMBOL].values, inplace=True)  # set index 20260529
-    _all.set_index(_SYMBOL, inplace=True)                 # set index 20260529
+    #_all.set_index(_SYMBOL, inplace=True)                 # set index 20260529
+    _all.index = list(_all[_SYMBOL])           # set index 20260529
     _all[_CONVERSION_FACTOR] = _all[_CONVERSION_FACTOR].apply(lambda factor:Fraction(factor))  # conversion factor as Fraction
 
     @lru_cache()
